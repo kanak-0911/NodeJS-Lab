@@ -1,0 +1,11 @@
+Difference Between Browser JavaScript and Node.js
+
+1. Browser JavaScript runs inside a web browser, while Node.js runs outside the browser.
+
+2. Browser JavaScript is mainly used for frontend development, whereas Node.js is mainly used for backend development.
+
+3. Browser JavaScript can access the DOM, but Node.js cannot.
+
+4. Node.js can access files and the operating system, while Browser JavaScript has limited access.
+
+5. Browser JavaScript runs in browsers like Chrome and Firefox, whereas Node.js runs using the V8 JavaScript engine.
