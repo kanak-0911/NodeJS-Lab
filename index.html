@@ -5,205 +5,413 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Node.js Lab Portfolio</title>
+    <title>Node.js Lab Portfolio | Kanak</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --dark-card: #1e293b;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.18);
+            --white: #ffffff;
+            --green: #22c55e;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(99, 102, 241, 0.18), transparent 35%),
+                radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent 35%),
+                #0b1120;
+            color: var(--text);
+            min-height: 100vh;
         }
 
+        /* HEADER */
+
         header {
-            background: #1e3a8a;
-            color: white;
+            padding: 70px 20px 55px;
             text-align: center;
-            padding: 45px 20px;
+            background:
+                linear-gradient(135deg,
+                    rgba(30, 41, 59, 0.95),
+                    rgba(15, 23, 42, 0.98));
+            border-bottom: 1px solid var(--border);
+        }
+
+        .node-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            border-radius: 30px;
+            background: rgba(99, 102, 241, 0.12);
+            color: #a5b4fc;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 22px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
         }
 
         header h1 {
-            margin: 0 0 10px;
-            font-size: 38px;
+            font-size: clamp(34px, 6vw, 58px);
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #ffffff, #a5b4fc, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            margin: 0;
+            color: var(--muted);
             font-size: 17px;
         }
 
+        .subtitle {
+            max-width: 650px;
+            margin: 15px auto 0;
+            line-height: 1.7;
+            color: #cbd5e1;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 45px 20px 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+        /* LAB CARDS */
+
         .labs {
-            max-width: 1100px;
-            margin: 35px auto;
-            padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 18px;
         }
 
         .lab-card {
-            background: white;
-            border: none;
-            border-radius: 15px;
-            padding: 25px 15px;
+            position: relative;
+            min-height: 205px;
+            padding: 25px 20px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: rgba(30, 41, 59, 0.72);
+            color: var(--text);
+            text-align: left;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: 0.25s;
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+
+        .lab-card::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: 50%;
+            top: -55px;
+            right: -45px;
+            transition: 0.3s;
         }
 
         .lab-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            border-color: rgba(129, 140, 248, 0.6);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+        }
+
+        .lab-card:hover::before {
+            transform: scale(1.4);
+        }
+
+        .lab-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .lab-number {
-            font-size: 14px;
+            color: #a5b4fc;
+            font-size: 12px;
             font-weight: bold;
-            color: #2563eb;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
 
-        .lab-card h2 {
-            margin: 10px 0;
-            color: #111827;
+        .lab-card h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
         }
 
         .lab-card p {
-            margin: 0;
-            color: #6b7280;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
         }
 
+        /* CONTENT */
+
         #lab-content {
-            max-width: 1100px;
-            margin: 0 auto 50px;
-            background: white;
+            margin-top: 35px;
             padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: rgba(15, 23, 42, 0.82);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
         }
 
         #lab-content h2 {
-            color: #1e40af;
-            margin-top: 0;
+            font-size: 27px;
+            margin-bottom: 18px;
+            color: #c7d2fe;
         }
 
         #lab-content h3 {
-            margin-top: 30px;
-            color: #374151;
+            margin: 30px 0 14px;
+            color: #ddd6fe;
         }
 
         #lab-content p {
-            line-height: 1.7;
+            color: #cbd5e1;
+            line-height: 1.8;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
+        #lab-content ul {
+            padding-left: 22px;
+            color: #cbd5e1;
+            line-height: 2;
         }
 
-        th {
-            background: #2563eb;
-            color: white;
-            padding: 12px;
-            text-align: left;
+        /* TAGS */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
         }
 
-        td {
-            padding: 11px;
-            border: 1px solid #e5e7eb;
+        .tag {
+            padding: 7px 12px;
+            border-radius: 20px;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            color: #c7d2fe;
+            font-size: 12px;
         }
 
-        tr:nth-child(even) {
-            background: #f8fafc;
-        }
+        /* BUTTONS */
 
         .button {
-            padding: 10px 16px;
-            margin: 5px;
             border: none;
-            border-radius: 7px;
-            background: #2563eb;
+            padding: 11px 17px;
+            margin: 5px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             cursor: pointer;
-            font-size: 14px;
+            font-weight: bold;
+            transition: 0.25s;
         }
 
         .button:hover {
-            background: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
         }
+
+        .back-button {
+            margin-top: 30px;
+            padding: 11px 20px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: #1e293b;
+            color: #cbd5e1;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #334155;
+        }
+
+        /* INPUTS */
 
         .input {
-            padding: 10px;
+            padding: 11px 13px;
             margin: 5px;
-            border: 1px solid #d1d5db;
-            border-radius: 7px;
-            font-size: 14px;
+            min-width: 190px;
+            border: 1px solid #334155;
+            border-radius: 9px;
+            background: #0f172a;
+            color: white;
+            outline: none;
         }
 
-        .route-box {
-            background: #f8fafc;
-            padding: 18px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
         }
+
+        /* ROUTE BOX */
+
+        .route-box {
+            padding: 22px;
+            margin-top: 15px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: rgba(30, 41, 59, 0.55);
+        }
+
+        /* RESULT */
 
         #result {
             margin-top: 25px;
         }
 
         .message {
-            padding: 15px;
-            background: #eef2ff;
-            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: rgba(30, 41, 59, 0.65);
+            color: #cbd5e1;
+        }
+
+        .message h3 {
+            margin-top: 0 !important;
+            color: #c7d2fe !important;
+        }
+
+        /* TABLE */
+
+        table {
+            width: 100%;
             margin-top: 15px;
+            border-collapse: separate;
+            border-spacing: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 12px;
         }
 
-        .back-button {
-            margin-top: 25px;
-            padding: 10px 18px;
-            border: none;
-            border-radius: 8px;
-            background: #1e40af;
+        th {
+            padding: 13px;
+            background: #312e81;
             color: white;
-            cursor: pointer;
+            text-align: left;
+            font-size: 13px;
         }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #6b7280;
+        td {
+            padding: 12px;
+            border-top: 1px solid var(--border);
+            color: #cbd5e1;
+            background: rgba(30, 41, 59, 0.55);
+        }
+
+        tr:hover td {
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        /* CODE */
+
+        code {
+            padding: 3px 7px;
+            border-radius: 5px;
+            background: #111827;
+            color: #a5b4fc;
         }
 
         pre {
-            background: #111827;
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 18px;
+            margin-top: 15px;
+            border-radius: 10px;
+            background: #020617;
+            color: #c7d2fe;
             overflow-x: auto;
+            line-height: 1.6;
         }
 
-        @media (max-width: 850px) {
+        /* FOOTER */
+
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid var(--border);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 950px) {
             .labs {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
+            header {
+                padding: 50px 18px 40px;
+            }
+
+            main {
+                padding: 30px 15px;
+            }
+
             .labs {
                 grid-template-columns: 1fr;
             }
 
-            header h1 {
-                font-size: 28px;
+            #lab-content {
+                padding: 22px;
             }
 
-            #lab-content {
-                margin: 0 15px 40px;
-                padding: 22px;
+            .input {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .button {
+                margin: 5px 2px;
             }
         }
     </style>
@@ -212,56 +420,132 @@
 <body>
 
     <header>
-        <h1>Node.js Lab Portfolio</h1>
+
+        <div class="node-badge">
+            <span class="status-dot"></span>
+            Node.js Lab Portfolio
+        </div>
+
+        <h1>Node.js Laboratory</h1>
+
         <p>Kanak | BCA | Semester VII</p>
+
+        <p class="subtitle">
+            A collection of Node.js laboratory assignments covering
+            server creation, HTTP routes, REST APIs, search, filtering
+            and sorting.
+        </p>
+
     </header>
 
-    <div class="labs">
 
-        <button class="lab-card" onclick="showLab(1)">
-            <div class="lab-number">LAB 01</div>
-            <h2>Node.js Basics</h2>
-            <p>Node.js setup and basic program</p>
-        </button>
+    <main>
 
-        <button class="lab-card" onclick="showLab(2)">
-            <div class="lab-number">LAB 02</div>
-            <h2>HTTP Server & Routes</h2>
-            <p>HTTP server and multiple routes</p>
-        </button>
+        <div class="section-title">
+            <h2>My Lab Assignments</h2>
+            <p>Select a lab to explore its work and features</p>
+        </div>
 
-        <button class="lab-card" onclick="showLab(3)">
-            <div class="lab-number">LAB 03</div>
-            <h2>Student Directory API</h2>
-            <p>Student data and API operations</p>
-        </button>
 
-        <button class="lab-card" onclick="showLab(4)">
-            <div class="lab-number">LAB 04</div>
-            <h2>Search, Filter & Sort</h2>
-            <p>Advanced Student API</p>
-        </button>
+        <div class="labs">
 
-    </div>
+            <button class="lab-card" onclick="showLab(1)">
 
-    <div id="lab-content">
+                <div class="lab-icon">01</div>
 
-        <h2>Welcome to My Node.js Lab Portfolio</h2>
+                <div class="lab-number">LAB 01</div>
 
-        <p>
-            This portfolio contains the work completed for
-            Node.js Lab Assignments 01 to 04.
-        </p>
+                <h3>Node.js Basics</h3>
 
-        <p>
-            Click on any lab above to view its work,
-            API features, student data and routes.
-        </p>
+                <p>
+                    Node.js setup, npm project and basic
+                    program execution.
+                </p>
 
-    </div>
+            </button>
+
+
+            <button class="lab-card" onclick="showLab(2)">
+
+                <div class="lab-icon">02</div>
+
+                <div class="lab-number">LAB 02</div>
+
+                <h3>HTTP Server & Routes</h3>
+
+                <p>
+                    HTTP server creation with multiple
+                    custom routes.
+                </p>
+
+            </button>
+
+
+            <button class="lab-card" onclick="showLab(3)">
+
+                <div class="lab-icon">03</div>
+
+                <div class="lab-number">LAB 03</div>
+
+                <h3>Student Directory API</h3>
+
+                <p>
+                    Student data, API endpoints and
+                    individual records.
+                </p>
+
+            </button>
+
+
+            <button class="lab-card" onclick="showLab(4)">
+
+                <div class="lab-icon">04</div>
+
+                <div class="lab-number">LAB 04</div>
+
+                <h3>Search, Filter & Sort</h3>
+
+                <p>
+                    Advanced API operations with search,
+                    filters and sorting.
+                </p>
+
+            </button>
+
+        </div>
+
+
+        <div id="lab-content">
+
+            <h2>Welcome to My Node.js Lab Portfolio</h2>
+
+            <p>
+                This portfolio contains the work completed for
+                Node.js Lab Assignments 01 to 04.
+            </p>
+
+            <div class="tags">
+                <span class="tag">Node.js</span>
+                <span class="tag">HTTP</span>
+                <span class="tag">REST API</span>
+                <span class="tag">JSON</span>
+                <span class="tag">Search</span>
+                <span class="tag">Filter</span>
+                <span class="tag">Sort</span>
+            </div>
+
+            <p style="margin-top:20px;">
+                Click on any lab above to explore its work,
+                API features and student data.
+            </p>
+
+        </div>
+
+    </main>
+
 
     <footer>
-        Node.js Lab Portfolio | BCA Semester VII
+        Node.js Lab Portfolio &nbsp;|&nbsp; BCA Semester VII
     </footer>
 
 
@@ -271,19 +555,57 @@
 
             const content = document.getElementById("lab-content");
 
+
+            /* LAB 01 */
+
             if (labNumber === 1) {
 
                 content.innerHTML = `
 
                     <h2>Lab 01 - Node.js Basics</h2>
 
+                    <div class="tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">npm</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+
                     <h3>Student Details</h3>
 
-                    <p><b>Name:</b> Kanak</p>
-                    <p><b>Scholar Number:</b> 23145009</p>
-                    <p><b>Course:</b> BCA</p>
-                    <p><b>Semester:</b> VII</p>
-                    <p><b>University:</b> Dev Sanskriti Vishwavidyalaya</p>
+                    <table>
+
+                        <tr>
+                            <th>Detail</th>
+                            <th>Information</th>
+                        </tr>
+
+                        <tr>
+                            <td>Name</td>
+                            <td>Kanak</td>
+                        </tr>
+
+                        <tr>
+                            <td>Scholar Number</td>
+                            <td>23145009</td>
+                        </tr>
+
+                        <tr>
+                            <td>Course</td>
+                            <td>BCA</td>
+                        </tr>
+
+                        <tr>
+                            <td>Semester</td>
+                            <td>VII</td>
+                        </tr>
+
+                        <tr>
+                            <td>University</td>
+                            <td>Dev Sanskriti Vishwavidyalaya</td>
+                        </tr>
+
+                    </table>
+
 
                     <h3>Files Included</h3>
 
@@ -295,6 +617,7 @@
                         <li>node-version.png</li>
                     </ul>
 
+
                     <h3>Lab Work</h3>
 
                     <p>
@@ -303,12 +626,15 @@
                         version and program output were also tested.
                     </p>
 
+
                     <button class="back-button" onclick="goHome()">
-                        Back to Labs
+                        ← Back to Labs
                     </button>
                 `;
             }
 
+
+            /* LAB 02 */
 
             else if (labNumber === 2) {
 
@@ -316,14 +642,27 @@
 
                     <h2>Lab 02 - HTTP Server & Routes</h2>
 
+                    <div class="tags">
+                        <span class="tag">HTTP Server</span>
+                        <span class="tag">Routes</span>
+                        <span class="tag">JSON</span>
+                    </div>
+
+
                     <h3>Student Details</h3>
 
-                    <p><b>Name:</b> Kanak</p>
-                    <p><b>Scholar Number:</b> 23145009</p>
-                    <p><b>Course:</b> BCA</p>
-                    <p><b>Semester:</b> VII</p>
+                    <p>
+                        <b>Name:</b> Kanak
+                        &nbsp; | &nbsp;
+                        <b>Scholar Number:</b> 23145009
+                        &nbsp; | &nbsp;
+                        <b>Course:</b> BCA
+                        &nbsp; | &nbsp;
+                        <b>Semester:</b> VII
+                    </p>
 
-                    <h3>Routes</h3>
+
+                    <h3>Interactive Routes</h3>
 
                     <div class="route-box">
 
@@ -344,22 +683,27 @@
 
                     </div>
 
+
                     <div id="result"></div>
+
 
                     <h3>Lab Work</h3>
 
                     <p>
-                        In this lab, a basic HTTP server was created using
-                        Node.js. Different routes were added to return
-                        different responses.
+                        A basic HTTP server was created using Node.js.
+                        Different routes were added to return different
+                        responses.
                     </p>
 
+
                     <button class="back-button" onclick="goHome()">
-                        Back to Labs
+                        ← Back to Labs
                     </button>
                 `;
             }
 
+
+            /* LAB 03 */
 
             else if (labNumber === 3) {
 
@@ -367,12 +711,20 @@
 
                     <h2>Lab 03 - Student Directory API</h2>
 
+                    <div class="tags">
+                        <span class="tag">REST API</span>
+                        <span class="tag">Students</span>
+                        <span class="tag">JSON</span>
+                    </div>
+
+
                     <h3>Student Directory</h3>
 
                     <p>
-                        Use the buttons below to interact with the
-                        Student Directory API.
+                        Use the buttons below to interact with
+                        the Student Directory API.
                     </p>
+
 
                     <div class="route-box">
 
@@ -383,12 +735,12 @@
 
                         <button class="button"
                                 onclick="fetchStudents('/students/1')">
-                            Show Student ID 1
+                            Student ID 1
                         </button>
 
                         <button class="button"
                                 onclick="fetchStudents('/students/course/BCA')">
-                            Show BCA Students
+                            BCA Students
                         </button>
 
                         <button class="button"
@@ -398,33 +750,46 @@
 
                         <button class="button"
                                 onclick="fetchStudents('/items/1')">
-                            Show Book ID 1
+                            Book ID 1
                         </button>
 
                     </div>
 
+
                     <div id="result"></div>
+
 
                     <h3>Lab Work</h3>
 
                     <p>
-                        In this lab, a Student Directory API was created
-                        using Node.js. The API returns student data,
+                        A Student Directory API was created using
+                        Node.js. The API returns student data,
                         individual students and course-wise data.
                     </p>
 
+
                     <button class="back-button" onclick="goHome()">
-                        Back to Labs
+                        ← Back to Labs
                     </button>
                 `;
             }
 
+
+            /* LAB 04 */
 
             else if (labNumber === 4) {
 
                 content.innerHTML = `
 
                     <h2>Lab 04 - Search, Filter & Sort API</h2>
+
+                    <div class="tags">
+                        <span class="tag">Search</span>
+                        <span class="tag">Filter</span>
+                        <span class="tag">Sort</span>
+                        <span class="tag">Query Parameters</span>
+                    </div>
+
 
                     <h3>Student API Controls</h3>
 
@@ -435,7 +800,9 @@
                             Show All Students
                         </button>
 
+
                         <br>
+
 
                         <input
                             id="courseInput"
@@ -448,7 +815,9 @@
                             Apply Course Filter
                         </button>
 
+
                         <br>
+
 
                         <input
                             id="marksInput"
@@ -461,7 +830,9 @@
                             Apply Marks Filter
                         </button>
 
+
                         <br>
+
 
                         <input
                             id="searchInput"
@@ -474,31 +845,34 @@
                             Search Student
                         </button>
 
+
                         <br>
+
 
                         <button class="button"
                                 onclick="fetchStudents('/students?sort=marks&order=desc')">
-                            Sort Marks: High to Low
+                            Marks ↓
                         </button>
 
                         <button class="button"
                                 onclick="fetchStudents('/students?sort=marks&order=asc')">
-                            Sort Marks: Low to High
+                            Marks ↑
                         </button>
 
-                        <br>
 
                         <button class="button"
                                 onclick="fetchStudents('/students?sort=name&order=asc')">
-                            Sort Name A-Z
+                            Name A-Z
                         </button>
 
                         <button class="button"
                                 onclick="fetchStudents('/students?sort=name&order=desc')">
-                            Sort Name Z-A
+                            Name Z-A
                         </button>
 
+
                         <br>
+
 
                         <button class="button"
                                 onclick="applyCombinedFilter()">
@@ -507,7 +881,9 @@
 
                     </div>
 
+
                     <div id="result"></div>
+
 
                     <h3>Features Implemented</h3>
 
@@ -521,16 +897,16 @@
                         <li>Input validation</li>
                     </ul>
 
+
                     <button class="back-button" onclick="goHome()">
-                        Back to Labs
+                        ← Back to Labs
                     </button>
                 `;
             }
         }
 
 
-        // LAB 02 ROUTES
-        // FIXED: /about and /college return HTML, /profile returns JSON
+        /* LAB 02 */
 
         async function openRoute(route) {
 
@@ -542,6 +918,7 @@
                 </div>
             `;
 
+
             try {
 
                 const response = await fetch(route);
@@ -549,6 +926,7 @@
                 if (!response.ok) {
                     throw new Error("Route not found");
                 }
+
 
                 if (route === "/about") {
 
@@ -560,8 +938,8 @@
                             ${data}
                         </div>
                     `;
-
                 }
+
 
                 else if (route === "/college") {
 
@@ -573,57 +951,80 @@
                             ${data}
                         </div>
                     `;
-
                 }
+
 
                 else if (route === "/profile") {
 
                     const data = await response.json();
 
                     resultBox.innerHTML = `
+
                         <div class="message">
+
                             <h3>Student Profile</h3>
 
-                            <p>
-                                <b>Name:</b> ${data.name}
-                            </p>
+                            <table>
 
-                            <p>
-                                <b>Scholar Number:</b>
-                                ${data.scholarNumber}
-                            </p>
+                                <tr>
+                                    <th>Detail</th>
+                                    <th>Information</th>
+                                </tr>
 
-                            <p>
-                                <b>Course:</b> ${data.course}
-                            </p>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>${data.name}</td>
+                                </tr>
 
-                            <p>
-                                <b>Semester:</b> ${data.semester}
-                            </p>
+                                <tr>
+                                    <td>Scholar Number</td>
+                                    <td>${data.scholarNumber}</td>
+                                </tr>
 
-                            <p>
-                                <b>University:</b> ${data.university}
-                            </p>
+                                <tr>
+                                    <td>Course</td>
+                                    <td>${data.course}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Semester</td>
+                                    <td>${data.semester}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>University</td>
+                                    <td>${data.university}</td>
+                                </tr>
+
+                            </table>
+
                         </div>
                     `;
                 }
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 resultBox.innerHTML = `
+
                     <div class="message">
-                        <b>Unable to connect to the Node.js server.</b>
+
+                        <h3>Unable to connect</h3>
+
                         <p>
-                            Please make sure the server is running using
+                            Please make sure the Node.js server
+                            is running using
                             <code>node server.js</code>.
                         </p>
+
                     </div>
                 `;
             }
         }
 
 
-        // LAB 03 + LAB 04
+        /* LAB 03 + LAB 04 */
 
         async function fetchStudents(route) {
 
@@ -635,31 +1036,47 @@
                 </div>
             `;
 
+
             try {
 
                 const response = await fetch(route);
 
                 const data = await response.json();
 
+
                 if (!response.ok) {
 
                     resultBox.innerHTML = `
+
                         <div class="message">
-                            <b>Error:</b> ${data.error}
+
+                            <h3>Error</h3>
+
+                            <p>${data.error}</p>
+
                         </div>
                     `;
 
                     return;
                 }
 
+
                 displayData(data);
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 resultBox.innerHTML = `
+
                     <div class="message">
-                        Unable to load data.
-                        Make sure the Node.js server is running.
+
+                        <h3>Unable to load data</h3>
+
+                        <p>
+                            Make sure the Node.js server is running.
+                        </p>
+
                     </div>
                 `;
             }
@@ -671,13 +1088,14 @@
             const resultBox = document.getElementById("result");
 
 
-            // Single object
+            /* SINGLE OBJECT */
 
             if (!Array.isArray(data)) {
 
                 if (data.title) {
 
                     resultBox.innerHTML = `
+
                         <h3>Book Details</h3>
 
                         <table>
@@ -695,9 +1113,12 @@
                         </table>
                     `;
 
-                } else {
+                }
+
+                else {
 
                     resultBox.innerHTML = `
+
                         <h3>Student Details</h3>
 
                         <table>
@@ -724,11 +1145,12 @@
             }
 
 
-            // Empty result
+            /* EMPTY RESULT */
 
             if (data.length === 0) {
 
                 resultBox.innerHTML = `
+
                     <div class="message">
                         No records found.
                     </div>
@@ -738,7 +1160,7 @@
             }
 
 
-            // Books
+            /* BOOKS */
 
             if (data[0].title) {
 
@@ -747,13 +1169,15 @@
                 data.forEach(book => {
 
                     rows += `
+
                         <tr>
                             <td>${book.id}</td>
                             <td>${book.title}</td>
                         </tr>
-                    `;
 
+                    `;
                 });
+
 
                 resultBox.innerHTML = `
 
@@ -775,21 +1199,22 @@
             }
 
 
-            // Students
+            /* STUDENTS */
 
             let rows = "";
 
             data.forEach(student => {
 
                 rows += `
+
                     <tr>
                         <td>${student.id}</td>
                         <td>${student.name}</td>
                         <td>${student.course}</td>
                         <td>${student.marks}</td>
                     </tr>
-                `;
 
+                `;
             });
 
 
@@ -813,15 +1238,21 @@
         }
 
 
+        /* FILTERS */
+
         function applyCourseFilter() {
 
             const course =
                 document.getElementById("courseInput").value.trim();
 
+
             if (!course) {
+
                 alert("Please enter a course.");
+
                 return;
             }
+
 
             fetchStudents(
                 "/students?course=" +
@@ -835,10 +1266,14 @@
             const marks =
                 document.getElementById("marksInput").value.trim();
 
+
             if (!marks) {
+
                 alert("Please enter minimum marks.");
+
                 return;
             }
+
 
             fetchStudents(
                 "/students?minMarks=" +
@@ -852,10 +1287,14 @@
             const search =
                 document.getElementById("searchInput").value.trim();
 
+
             if (!search) {
+
                 alert("Please enter a student name.");
+
                 return;
             }
+
 
             fetchStudents(
                 "/students?search=" +
@@ -875,7 +1314,9 @@
             const search =
                 document.getElementById("searchInput").value.trim();
 
+
             let params = [];
+
 
             if (course) {
 
@@ -885,6 +1326,7 @@
                 );
             }
 
+
             if (marks) {
 
                 params.push(
@@ -892,6 +1334,7 @@
                     encodeURIComponent(marks)
                 );
             }
+
 
             if (search) {
 
@@ -901,14 +1344,18 @@
                 );
             }
 
+
             params.push("sort=marks");
             params.push("order=desc");
+
 
             fetchStudents(
                 "/students?" + params.join("&")
             );
         }
 
+
+        /* HOME */
 
         function goHome() {
 
@@ -921,9 +1368,19 @@
                     Node.js Lab Assignments 01 to 04.
                 </p>
 
-                <p>
-                    Click on any lab above to view its work,
-                    API features, student data and routes.
+                <div class="tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">HTTP</span>
+                    <span class="tag">REST API</span>
+                    <span class="tag">JSON</span>
+                    <span class="tag">Search</span>
+                    <span class="tag">Filter</span>
+                    <span class="tag">Sort</span>
+                </div>
+
+                <p style="margin-top:20px;">
+                    Click on any lab above to explore its work,
+                    API features and student data.
                 </p>
 
             `;
