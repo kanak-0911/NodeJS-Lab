@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Node.js Lab Portfolio</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 38px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        .labs {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .lab-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            padding: 25px 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.25s;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .lab-number {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .lab-card h2 {
+            margin: 10px 0;
+            color: #111827;
+        }
+
+        .lab-card p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        #lab-content {
+            max-width: 1100px;
+            margin: 0 auto 50px;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        #lab-content h2 {
+            color: #1e40af;
+            margin-top: 0;
+        }
+
+        #lab-content h3 {
+            margin-top: 30px;
+            color: #374151;
+        }
+
+        #lab-content p {
+            line-height: 1.7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 11px;
+            border: 1px solid #e5e7eb;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .button {
+            padding: 10px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .button:hover {
+            background: #1e40af;
+        }
+
+        .input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .route-box {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        #result {
+            margin-top: 25px;
+        }
+
+        .message {
+            padding: 15px;
+            background: #eef2ff;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .back-button {
+            margin-top: 25px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #1e40af;
+            color: white;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #6b7280;
+        }
+
+        pre {
+            background: #111827;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 850px) {
+            .labs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .labs {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            #lab-content {
+                margin: 0 15px 40px;
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Node.js Lab Portfolio</h1>
+        <p>Kanak | BCA | Semester VII</p>
+    </header>
+
+    <div class="labs">
+
+        <button class="lab-card" onclick="showLab(1)">
+            <div class="lab-number">LAB 01</div>
+            <h2>Node.js Basics</h2>
+            <p>Node.js setup and basic program</p>
+        </button>
+
+        <button class="lab-card" onclick="showLab(2)">
+            <div class="lab-number">LAB 02</div>
+            <h2>HTTP Server & Routes</h2>
+            <p>HTTP server and multiple routes</p>
+        </button>
+
+        <button class="lab-card" onclick="showLab(3)">
+            <div class="lab-number">LAB 03</div>
+            <h2>Student Directory API</h2>
+            <p>Student data and API operations</p>
+        </button>
+
+        <button class="lab-card" onclick="showLab(4)">
+            <div class="lab-number">LAB 04</div>
+            <h2>Search, Filter & Sort</h2>
+            <p>Advanced Student API</p>
+        </button>
+
+    </div>
+
+    <div id="lab-content">
+
+        <h2>Welcome to My Node.js Lab Portfolio</h2>
+
+        <p>
+            This portfolio contains the work completed for
+            Node.js Lab Assignments 01 to 04.
+        </p>
+
+        <p>
+            Click on any lab above to view its work,
+            API features, student data and routes.
+        </p>
+
+    </div>
+
+    <footer>
+        Node.js Lab Portfolio | BCA Semester VII
+    </footer>
+
+
+    <script>
+
+        function showLab(labNumber) {
+
+            const content = document.getElementById("lab-content");
+
+            if (labNumber === 1) {
+
+                content.innerHTML = `
+
+                    <h2>Lab 01 - Node.js Basics</h2>
+
+                    <h3>Student Details</h3>
+
+                    <p><b>Name:</b> Kanak</p>
+                    <p><b>Scholar Number:</b> 23145009</p>
+                    <p><b>Course:</b> BCA</p>
+                    <p><b>Semester:</b> VII</p>
+                    <p><b>University:</b> Dev Sanskriti Vishwavidyalaya</p>
+
+                    <h3>Files Included</h3>
+
+                    <ul>
+                        <li>app.js</li>
+                        <li>package.json</li>
+                        <li>README.md</li>
+                        <li>difference.txt</li>
+                        <li>node-version.png</li>
+                    </ul>
+
+                    <h3>Lab Work</h3>
+
+                    <p>
+                        In this lab, Node.js was installed and a basic
+                        Node.js project was created using npm. The Node.js
+                        version and program output were also tested.
+                    </p>
+
+                    <button class="back-button" onclick="goHome()">
+                        Back to Labs
+                    </button>
+                `;
+            }
+
+
+            else if (labNumber === 2) {
+
+                content.innerHTML = `
+
+                    <h2>Lab 02 - HTTP Server & Routes</h2>
+
+                    <h3>Student Details</h3>
+
+                    <p><b>Name:</b> Kanak</p>
+                    <p><b>Scholar Number:</b> 23145009</p>
+                    <p><b>Course:</b> BCA</p>
+                    <p><b>Semester:</b> VII</p>
+
+                    <h3>Routes</h3>
+
+                    <div class="route-box">
+
+                        <button class="button"
+                                onclick="openRoute('/about')">
+                            About
+                        </button>
+
+                        <button class="button"
+                                onclick="openRoute('/college')">
+                            College
+                        </button>
+
+                        <button class="button"
+                                onclick="openRoute('/profile')">
+                            Profile
+                        </button>
+
+                    </div>
+
+                    <div id="result"></div>
+
+                    <h3>Lab Work</h3>
+
+                    <p>
+                        In this lab, a basic HTTP server was created using
+                        Node.js. Different routes were added to return
+                        different responses.
+                    </p>
+
+                    <button class="back-button" onclick="goHome()">
+                        Back to Labs
+                    </button>
+                `;
+            }
+
+
+            else if (labNumber === 3) {
+
+                content.innerHTML = `
+
+                    <h2>Lab 03 - Student Directory API</h2>
+
+                    <h3>Student Directory</h3>
+
+                    <p>
+                        Use the buttons below to interact with the
+                        Student Directory API.
+                    </p>
+
+                    <div class="route-box">
+
+                        <button class="button"
+                                onclick="fetchStudents('/students')">
+                            Show All Students
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students/1')">
+                            Show Student ID 1
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students/course/BCA')">
+                            Show BCA Students
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/items')">
+                            Show All Books
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/items/1')">
+                            Show Book ID 1
+                        </button>
+
+                    </div>
+
+                    <div id="result"></div>
+
+                    <h3>Lab Work</h3>
+
+                    <p>
+                        In this lab, a Student Directory API was created
+                        using Node.js. The API returns student data,
+                        individual students and course-wise data.
+                    </p>
+
+                    <button class="back-button" onclick="goHome()">
+                        Back to Labs
+                    </button>
+                `;
+            }
+
+
+            else if (labNumber === 4) {
+
+                content.innerHTML = `
+
+                    <h2>Lab 04 - Search, Filter & Sort API</h2>
+
+                    <h3>Student API Controls</h3>
+
+                    <div class="route-box">
+
+                        <button class="button"
+                                onclick="fetchStudents('/students')">
+                            Show All Students
+                        </button>
+
+                        <br>
+
+                        <input
+                            id="courseInput"
+                            class="input"
+                            type="text"
+                            placeholder="Course e.g. BCA">
+
+                        <button class="button"
+                                onclick="applyCourseFilter()">
+                            Apply Course Filter
+                        </button>
+
+                        <br>
+
+                        <input
+                            id="marksInput"
+                            class="input"
+                            type="number"
+                            placeholder="Minimum Marks">
+
+                        <button class="button"
+                                onclick="applyMarksFilter()">
+                            Apply Marks Filter
+                        </button>
+
+                        <br>
+
+                        <input
+                            id="searchInput"
+                            class="input"
+                            type="text"
+                            placeholder="Search student name">
+
+                        <button class="button"
+                                onclick="applySearch()">
+                            Search Student
+                        </button>
+
+                        <br>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students?sort=marks&order=desc')">
+                            Sort Marks: High to Low
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students?sort=marks&order=asc')">
+                            Sort Marks: Low to High
+                        </button>
+
+                        <br>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students?sort=name&order=asc')">
+                            Sort Name A-Z
+                        </button>
+
+                        <button class="button"
+                                onclick="fetchStudents('/students?sort=name&order=desc')">
+                            Sort Name Z-A
+                        </button>
+
+                        <br>
+
+                        <button class="button"
+                                onclick="applyCombinedFilter()">
+                            Apply Combined Filter
+                        </button>
+
+                    </div>
+
+                    <div id="result"></div>
+
+                    <h3>Features Implemented</h3>
+
+                    <ul>
+                        <li>Course filtering</li>
+                        <li>Minimum marks filtering</li>
+                        <li>Partial name search</li>
+                        <li>Sorting by marks</li>
+                        <li>Sorting by name</li>
+                        <li>Combined filtering</li>
+                        <li>Input validation</li>
+                    </ul>
+
+                    <button class="back-button" onclick="goHome()">
+                        Back to Labs
+                    </button>
+                `;
+            }
+        }
+
+
+        // LAB 02 ROUTES
+        // FIXED: /about and /college return HTML, /profile returns JSON
+
+        async function openRoute(route) {
+
+            const resultBox = document.getElementById("result");
+
+            resultBox.innerHTML = `
+                <div class="message">
+                    Loading...
+                </div>
+            `;
+
+            try {
+
+                const response = await fetch(route);
+
+                if (!response.ok) {
+                    throw new Error("Route not found");
+                }
+
+                if (route === "/about") {
+
+                    const data = await response.text();
+
+                    resultBox.innerHTML = `
+                        <div class="message">
+                            <h3>About</h3>
+                            ${data}
+                        </div>
+                    `;
+
+                }
+
+                else if (route === "/college") {
+
+                    const data = await response.text();
+
+                    resultBox.innerHTML = `
+                        <div class="message">
+                            <h3>College Information</h3>
+                            ${data}
+                        </div>
+                    `;
+
+                }
+
+                else if (route === "/profile") {
+
+                    const data = await response.json();
+
+                    resultBox.innerHTML = `
+                        <div class="message">
+                            <h3>Student Profile</h3>
+
+                            <p>
+                                <b>Name:</b> ${data.name}
+                            </p>
+
+                            <p>
+                                <b>Scholar Number:</b>
+                                ${data.scholarNumber}
+                            </p>
+
+                            <p>
+                                <b>Course:</b> ${data.course}
+                            </p>
+
+                            <p>
+                                <b>Semester:</b> ${data.semester}
+                            </p>
+
+                            <p>
+                                <b>University:</b> ${data.university}
+                            </p>
+                        </div>
+                    `;
+                }
+
+            } catch (error) {
+
+                resultBox.innerHTML = `
+                    <div class="message">
+                        <b>Unable to connect to the Node.js server.</b>
+                        <p>
+                            Please make sure the server is running using
+                            <code>node server.js</code>.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+
+        // LAB 03 + LAB 04
+
+        async function fetchStudents(route) {
+
+            const resultBox = document.getElementById("result");
+
+            resultBox.innerHTML = `
+                <div class="message">
+                    Loading data...
+                </div>
+            `;
+
+            try {
+
+                const response = await fetch(route);
+
+                const data = await response.json();
+
+                if (!response.ok) {
+
+                    resultBox.innerHTML = `
+                        <div class="message">
+                            <b>Error:</b> ${data.error}
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                displayData(data);
+
+            } catch (error) {
+
+                resultBox.innerHTML = `
+                    <div class="message">
+                        Unable to load data.
+                        Make sure the Node.js server is running.
+                    </div>
+                `;
+            }
+        }
+
+
+        function displayData(data) {
+
+            const resultBox = document.getElementById("result");
+
+
+            // Single object
+
+            if (!Array.isArray(data)) {
+
+                if (data.title) {
+
+                    resultBox.innerHTML = `
+                        <h3>Book Details</h3>
+
+                        <table>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                            </tr>
+
+                            <tr>
+                                <td>${data.id}</td>
+                                <td>${data.title}</td>
+                            </tr>
+
+                        </table>
+                    `;
+
+                } else {
+
+                    resultBox.innerHTML = `
+                        <h3>Student Details</h3>
+
+                        <table>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Marks</th>
+                            </tr>
+
+                            <tr>
+                                <td>${data.id}</td>
+                                <td>${data.name}</td>
+                                <td>${data.course}</td>
+                                <td>${data.marks}</td>
+                            </tr>
+
+                        </table>
+                    `;
+                }
+
+                return;
+            }
+
+
+            // Empty result
+
+            if (data.length === 0) {
+
+                resultBox.innerHTML = `
+                    <div class="message">
+                        No records found.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            // Books
+
+            if (data[0].title) {
+
+                let rows = "";
+
+                data.forEach(book => {
+
+                    rows += `
+                        <tr>
+                            <td>${book.id}</td>
+                            <td>${book.title}</td>
+                        </tr>
+                    `;
+
+                });
+
+                resultBox.innerHTML = `
+
+                    <h3>Book List</h3>
+
+                    <table>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                        </tr>
+
+                        ${rows}
+
+                    </table>
+                `;
+
+                return;
+            }
+
+
+            // Students
+
+            let rows = "";
+
+            data.forEach(student => {
+
+                rows += `
+                    <tr>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>${student.course}</td>
+                        <td>${student.marks}</td>
+                    </tr>
+                `;
+
+            });
+
+
+            resultBox.innerHTML = `
+
+                <h3>Student Results</h3>
+
+                <table>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Marks</th>
+                    </tr>
+
+                    ${rows}
+
+                </table>
+            `;
+        }
+
+
+        function applyCourseFilter() {
+
+            const course =
+                document.getElementById("courseInput").value.trim();
+
+            if (!course) {
+                alert("Please enter a course.");
+                return;
+            }
+
+            fetchStudents(
+                "/students?course=" +
+                encodeURIComponent(course)
+            );
+        }
+
+
+        function applyMarksFilter() {
+
+            const marks =
+                document.getElementById("marksInput").value.trim();
+
+            if (!marks) {
+                alert("Please enter minimum marks.");
+                return;
+            }
+
+            fetchStudents(
+                "/students?minMarks=" +
+                encodeURIComponent(marks)
+            );
+        }
+
+
+        function applySearch() {
+
+            const search =
+                document.getElementById("searchInput").value.trim();
+
+            if (!search) {
+                alert("Please enter a student name.");
+                return;
+            }
+
+            fetchStudents(
+                "/students?search=" +
+                encodeURIComponent(search)
+            );
+        }
+
+
+        function applyCombinedFilter() {
+
+            const course =
+                document.getElementById("courseInput").value.trim();
+
+            const marks =
+                document.getElementById("marksInput").value.trim();
+
+            const search =
+                document.getElementById("searchInput").value.trim();
+
+            let params = [];
+
+            if (course) {
+
+                params.push(
+                    "course=" +
+                    encodeURIComponent(course)
+                );
+            }
+
+            if (marks) {
+
+                params.push(
+                    "minMarks=" +
+                    encodeURIComponent(marks)
+                );
+            }
+
+            if (search) {
+
+                params.push(
+                    "search=" +
+                    encodeURIComponent(search)
+                );
+            }
+
+            params.push("sort=marks");
+            params.push("order=desc");
+
+            fetchStudents(
+                "/students?" + params.join("&")
+            );
+        }
+
+
+        function goHome() {
+
+            document.getElementById("lab-content").innerHTML = `
+
+                <h2>Welcome to My Node.js Lab Portfolio</h2>
+
+                <p>
+                    This portfolio contains the work completed for
+                    Node.js Lab Assignments 01 to 04.
+                </p>
+
+                <p>
+                    Click on any lab above to view its work,
+                    API features, student data and routes.
+                </p>
+
+            `;
+        }
+
+    </script>
+
+</body>
+
+</html>
