@@ -30,13 +30,10 @@ const server = http.createServer((req, res) => {
     const pathname = parsedUrl.pathname;
     const query = parsedUrl.query;
 
-    // HOME PAGE
     if (pathname === "/") {
-
         const filePath = path.join(__dirname, "index.html");
 
         fs.readFile(filePath, (err, content) => {
-
             if (err) {
                 res.writeHead(500, { "Content-Type": "text/plain" });
                 res.end("Error loading index.html");
@@ -50,39 +47,29 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // LAB 02 ROUTES
-
     if (pathname === "/about") {
-
         res.writeHead(200, { "Content-Type": "text/html" });
-
         res.end(`
             <h1>About</h1>
             <p>This Node.js Lab portfolio is created by Kanak.</p>
             <p>BCA Semester VII</p>
         `);
-
         return;
     }
 
     if (pathname === "/college") {
-
         res.writeHead(200, { "Content-Type": "text/html" });
-
         res.end(`
             <h1>College Information</h1>
             <p><b>University:</b> Dev Sanskriti Vishwavidyalaya</p>
             <p><b>Course:</b> BCA</p>
             <p><b>Semester:</b> VII</p>
         `);
-
         return;
     }
 
     if (pathname === "/profile") {
-
         res.writeHead(200, { "Content-Type": "application/json" });
-
         res.end(JSON.stringify({
             name: "Kanak",
             scholarNumber: "23145009",
@@ -90,17 +77,12 @@ const server = http.createServer((req, res) => {
             semester: "VII",
             university: "Dev Sanskriti Vishwavidyalaya"
         }, null, 2));
-
         return;
     }
 
-    // LAB 03 + LAB 04 - STUDENT API
-
     if (pathname === "/students") {
-
         let result = [...students];
 
-        // Course filter
         if (query.course) {
             result = result.filter(
                 student =>
@@ -109,9 +91,7 @@ const server = http.createServer((req, res) => {
             );
         }
 
-        // Minimum marks
         if (query.minMarks) {
-
             const minMarks = Number(query.minMarks);
 
             if (isNaN(minMarks)) {
@@ -127,9 +107,7 @@ const server = http.createServer((req, res) => {
             );
         }
 
-        // Search by name
         if (query.search) {
-
             result = result.filter(
                 student =>
                     student.name
@@ -138,9 +116,7 @@ const server = http.createServer((req, res) => {
             );
         }
 
-        // Sorting
         if (query.sort === "marks") {
-
             result.sort((a, b) =>
                 query.order === "desc"
                     ? b.marks - a.marks
@@ -149,7 +125,6 @@ const server = http.createServer((req, res) => {
         }
 
         if (query.sort === "name") {
-
             result.sort((a, b) =>
                 query.order === "desc"
                     ? b.name.localeCompare(a.name)
@@ -158,20 +133,14 @@ const server = http.createServer((req, res) => {
         }
 
         res.writeHead(200, { "Content-Type": "application/json" });
-
         res.end(JSON.stringify(result, null, 2));
-
         return;
     }
 
-    // Individual student
     if (pathname.startsWith("/students/")) {
-
         const parts = pathname.split("/");
 
-        // /students/course/BCA
         if (parts[2] === "course") {
-
             const course = parts[3];
 
             let result = students.filter(
@@ -195,13 +164,10 @@ const server = http.createServer((req, res) => {
             }
 
             res.writeHead(200, { "Content-Type": "application/json" });
-
             res.end(JSON.stringify(result, null, 2));
-
             return;
         }
 
-        // /students/1
         const id = Number(parts[2]);
 
         const student = students.find(
@@ -209,36 +175,25 @@ const server = http.createServer((req, res) => {
         );
 
         if (!student) {
-
             res.writeHead(404, { "Content-Type": "application/json" });
-
             res.end(JSON.stringify({
                 error: "Student not found"
             }));
-
             return;
         }
 
         res.writeHead(200, { "Content-Type": "application/json" });
-
         res.end(JSON.stringify(student, null, 2));
-
         return;
     }
 
-    // ITEMS ROUTES
-
     if (pathname === "/items") {
-
         res.writeHead(200, { "Content-Type": "application/json" });
-
         res.end(JSON.stringify(books, null, 2));
-
         return;
     }
 
     if (pathname.startsWith("/items/")) {
-
         const id = Number(pathname.split("/")[2]);
 
         const book = books.find(
@@ -246,26 +201,19 @@ const server = http.createServer((req, res) => {
         );
 
         if (!book) {
-
             res.writeHead(404, { "Content-Type": "application/json" });
-
             res.end(JSON.stringify({
                 error: "Book not found"
             }));
-
             return;
         }
 
         res.writeHead(200, { "Content-Type": "application/json" });
-
         res.end(JSON.stringify(book, null, 2));
-
         return;
     }
 
-    // 404
     res.writeHead(404, { "Content-Type": "text/html" });
-
     res.end(`
         <h1>404 - Page Not Found</h1>
         <p>The requested route does not exist.</p>

@@ -1,0 +1,3 @@
+Node.js File System Module
+This is my Lab 06 assignment.
+I am learning file handling.
