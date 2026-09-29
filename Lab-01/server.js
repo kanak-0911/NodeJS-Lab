@@ -1,225 +1,477 @@
 const http = require("http");
-const fs = require("fs");
-const path = require("path");
-const url = require("url");
 
-const students = [
-    { id: 1, name: "Gauri", course: "BCA", marks: 72 },
-    { id: 2, name: "Kanak", course: "BCA", marks: 85 },
-    { id: 3, name: "Nisha", course: "BCA", marks: 64 },
-    { id: 4, name: "Pragya", course: "BCA", marks: 91 },
-    { id: 5, name: "Shreya Kashyap", course: "BCA", marks: 58 },
-    { id: 6, name: "Shreya Singh", course: "BCA", marks: 76 },
-    { id: 7, name: "Mikki", course: "BIT", marks: 68 },
-    { id: 8, name: "Ayush", course: "BIT", marks: 88 },
-    { id: 9, name: "Bhaskar", course: "BIT", marks: 55 },
-    { id: 10, name: "Rishabh", course: "BIT", marks: 79 },
-    { id: 11, name: "Aditya", course: "BIT", marks: 93 },
-    { id: 12, name: "Yadev", course: "BIT", marks: 61 }
-];
-
-const books = [
-    { id: 1, title: "Node.js Basics" },
-    { id: 2, title: "Learning Express" },
-    { id: 3, title: "JavaScript Guide" }
+const labs = [
+    {
+        number: "01",
+        title: "Node.js HTTP Server",
+        task: "Creating a basic HTTP server using Node.js",
+        description:
+            "Created a basic HTTP server and worked with different routes to return webpages and JSON responses.",
+        concepts: ["HTTP Server", "Routing", "Request & Response", "JSON"],
+        status: "Completed"
+    },
+    {
+        number: "02",
+        title: "Node.js Fundamentals",
+        task: "Understanding Node.js fundamentals and core concepts",
+        description:
+            "Worked with the basic concepts of Node.js and understood how Node.js applications work.",
+        concepts: ["Node.js", "Modules", "Core Concepts"],
+        status: "Completed"
+    },
+    {
+        number: "03",
+        title: "Student Directory",
+        task: "Creating and working with student data and routes",
+        description:
+            "Created a student directory containing student information and implemented routes for accessing student data.",
+        concepts: ["Routes", "Arrays", "Objects", "Query Parameters"],
+        status: "Completed"
+    },
+    {
+        number: "04",
+        title: "Node.js Modules",
+        task: "Working with Node.js built-in modules",
+        description:
+            "Worked with Node.js modules and understood how built-in modules are used in applications.",
+        concepts: ["Modules", "Core Modules", "Require"],
+        status: "Completed"
+    },
+    {
+        number: "05",
+        title: "Food Delivery Tracker",
+        task: "Working with asynchronous programming",
+        description:
+            "Created a Food Delivery Tracker using callbacks, promises, promise chaining, async-await and concurrent orders.",
+        concepts: ["Callbacks", "Promises", "Async/Await", "Concurrency"],
+        status: "Completed"
+    },
+    {
+        number: "06",
+        title: "File System Module",
+        task: "Working with the File System (fs) module",
+        description:
+            "Worked with file handling operations including reading, writing, appending and deleting files using Node.js.",
+        concepts: ["fs Module", "Read File", "Write File", "Append File", "Delete File"],
+        status: "Completed"
+    }
 ];
 
 const server = http.createServer((req, res) => {
 
-    const parsedUrl = url.parse(req.url, true);
-    const pathname = parsedUrl.pathname;
-    const query = parsedUrl.query;
+    if (req.url === "/") {
 
-    if (pathname === "/") {
-        const filePath = path.join(__dirname, "index.html");
+        let labCards = "";
 
-        fs.readFile(filePath, (err, content) => {
-            if (err) {
-                res.writeHead(500, { "Content-Type": "text/plain" });
-                res.end("Error loading index.html");
-                return;
-            }
+        labs.forEach((lab) => {
 
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.end(content);
+            let conceptTags = "";
+
+            lab.concepts.forEach((concept) => {
+                conceptTags += `<span class="tag">${concept}</span>`;
+            });
+
+            labCards += `
+                <div class="lab-card">
+
+                    <div class="lab-number">
+                        LAB ${lab.number}
+                    </div>
+
+                    <div class="lab-content">
+
+                        <div class="card-top">
+                            <h2>${lab.title}</h2>
+                            <span class="status">${lab.status}</span>
+                        </div>
+
+                        <p class="task">
+                            <strong>Task:</strong> ${lab.task}
+                        </p>
+
+                        <p class="description">
+                            ${lab.description}
+                        </p>
+
+                        <div class="tags">
+                            ${conceptTags}
+                        </div>
+
+                        <a class="view-button" href="/lab/${lab.number}">
+                            View Lab Details →
+                        </a>
+
+                    </div>
+
+                </div>
+            `;
         });
 
-        return;
-    }
+        const webpage = `
+<!DOCTYPE html>
+<html lang="en">
 
-    if (pathname === "/about") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(`
-            <h1>About</h1>
-            <p>This Node.js Lab portfolio is created by Kanak.</p>
-            <p>BCA Semester VII</p>
-        `);
-        return;
-    }
+<head>
 
-    if (pathname === "/college") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.end(`
-            <h1>College Information</h1>
-            <p><b>University:</b> Dev Sanskriti Vishwavidyalaya</p>
-            <p><b>Course:</b> BCA</p>
-            <p><b>Semester:</b> VII</p>
-        `);
-        return;
-    }
+    <meta charset="UTF-8">
 
-    if (pathname === "/profile") {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({
-            name: "Kanak",
-            scholarNumber: "23145009",
-            course: "BCA",
-            semester: "VII",
-            university: "Dev Sanskriti Vishwavidyalaya"
-        }, null, 2));
-        return;
-    }
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    if (pathname === "/students") {
-        let result = [...students];
+    <title>Node.js Lab Portfolio</title>
 
-        if (query.course) {
-            result = result.filter(
-                student =>
-                    student.course.toLowerCase() ===
-                    query.course.toLowerCase()
-            );
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        if (query.minMarks) {
-            const minMarks = Number(query.minMarks);
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
 
-            if (isNaN(minMarks)) {
-                res.writeHead(400, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({
-                    error: "minMarks must be a number"
-                }));
-                return;
+        .hero {
+            background: linear-gradient(135deg, #111827, #2563eb);
+            color: white;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .intro h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #6b7280;
+        }
+
+        .lab-card {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 22px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.25s;
+        }
+
+        .lab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .lab-number {
+            width: 125px;
+            min-width: 125px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .lab-content {
+            padding: 25px;
+            width: 100%;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-top h2 {
+            font-size: 23px;
+        }
+
+        .status {
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .task {
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        .description {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: #1d4ed8;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .view-button {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 10px 17px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .view-button:hover {
+            background: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+
+            .hero h1 {
+                font-size: 30px;
             }
 
-            result = result.filter(
-                student => student.marks >= minMarks
-            );
+            .lab-card {
+                flex-direction: column;
+            }
+
+            .lab-number {
+                width: 100%;
+                height: 65px;
+            }
+
+            .card-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
         }
 
-        if (query.search) {
-            result = result.filter(
-                student =>
-                    student.name
-                        .toLowerCase()
-                        .includes(query.search.toLowerCase())
-            );
-        }
+    </style>
 
-        if (query.sort === "marks") {
-            result.sort((a, b) =>
-                query.order === "desc"
-                    ? b.marks - a.marks
-                    : a.marks - b.marks
-            );
-        }
+</head>
 
-        if (query.sort === "name") {
-            result.sort((a, b) =>
-                query.order === "desc"
-                    ? b.name.localeCompare(a.name)
-                    : a.name.localeCompare(b.name)
-            );
-        }
+<body>
 
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(result, null, 2));
+    <section class="hero">
+
+        <h1>Node.js Lab Portfolio</h1>
+
+        <p>
+            A central dashboard containing my Node.js laboratory
+            work, tasks, concepts and practical implementations.
+        </p>
+
+    </section>
+
+    <main class="container">
+
+        <div class="intro">
+
+            <h2>My Lab Work</h2>
+
+            <p>
+                Explore the tasks and concepts covered in each laboratory.
+            </p>
+
+        </div>
+
+        ${labCards}
+
+    </main>
+
+    <footer>
+
+        BCA Semester VII • Node.js Laboratory • Kanak
+
+    </footer>
+
+</body>
+
+</html>
+        `;
+
+        res.writeHead(200, {
+            "Content-Type": "text/html"
+        });
+
+        res.end(webpage);
+
         return;
     }
 
-    if (pathname.startsWith("/students/")) {
-        const parts = pathname.split("/");
+    if (req.url.startsWith("/lab/")) {
 
-        if (parts[2] === "course") {
-            const course = parts[3];
+        const labNumber = req.url.split("/")[2];
 
-            let result = students.filter(
-                student =>
-                    student.course.toLowerCase() ===
-                    course.toLowerCase()
-            );
-
-            if (query.minMarks) {
-                result = result.filter(
-                    student => student.marks >= Number(query.minMarks)
-                );
-            }
-
-            if (query.sort === "marks") {
-                result.sort((a, b) =>
-                    query.order === "desc"
-                        ? b.marks - a.marks
-                        : a.marks - b.marks
-                );
-            }
-
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(result, null, 2));
-            return;
-        }
-
-        const id = Number(parts[2]);
-
-        const student = students.find(
-            student => student.id === id
+        const lab = labs.find(
+            item => item.number === labNumber
         );
 
-        if (!student) {
-            res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({
-                error: "Student not found"
-            }));
+        if (!lab) {
+
+            res.writeHead(404, {
+                "Content-Type": "text/html"
+            });
+
+            res.end("<h1>Lab Not Found</h1>");
+
             return;
         }
 
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(student, null, 2));
+        res.writeHead(200, {
+            "Content-Type": "text/html"
+        });
+
+        res.end(`
+            <html>
+
+            <head>
+
+                <title>${lab.title}</title>
+
+                <style>
+
+                    body {
+                        font-family: Arial, sans-serif;
+                        background: #f4f7fb;
+                        padding: 40px;
+                        color: #1f2937;
+                    }
+
+                    .box {
+                        max-width: 800px;
+                        margin: auto;
+                        background: white;
+                        padding: 35px;
+                        border-radius: 15px;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+                    }
+
+                    h1 {
+                        color: #2563eb;
+                    }
+
+                    p {
+                        line-height: 1.7;
+                    }
+
+                    .back {
+                        display: inline-block;
+                        margin-top: 25px;
+                        background: #111827;
+                        color: white;
+                        padding: 10px 16px;
+                        text-decoration: none;
+                        border-radius: 8px;
+                    }
+
+                </style>
+
+            </head>
+
+            <body>
+
+                <div class="box">
+
+                    <h1>Lab ${lab.number} - ${lab.title}</h1>
+
+                    <br>
+
+                    <p>
+                        <strong>Task:</strong><br>
+                        ${lab.task}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>What I Did:</strong><br>
+                        ${lab.description}
+                    </p>
+
+                    <br>
+
+                    <p>
+                        <strong>Concepts Used:</strong><br>
+                        ${lab.concepts.join(", ")}
+                    </p>
+
+                    <a class="back" href="/">
+                        ← Back to Dashboard
+                    </a>
+
+                </div>
+
+            </body>
+
+            </html>
+        `);
+
         return;
     }
 
-    if (pathname === "/items") {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(books, null, 2));
-        return;
-    }
+    res.writeHead(404, {
+        "Content-Type": "text/html"
+    });
 
-    if (pathname.startsWith("/items/")) {
-        const id = Number(pathname.split("/")[2]);
-
-        const book = books.find(
-            book => book.id === id
-        );
-
-        if (!book) {
-            res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({
-                error: "Book not found"
-            }));
-            return;
-        }
-
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(book, null, 2));
-        return;
-    }
-
-    res.writeHead(404, { "Content-Type": "text/html" });
     res.end(`
         <h1>404 - Page Not Found</h1>
-        <p>The requested route does not exist.</p>
+        <p>The requested page does not exist.</p>
     `);
+
 });
 
 server.listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
+    console.log("Main Lab Dashboard running at http://localhost:3000");
 });
