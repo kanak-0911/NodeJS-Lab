@@ -1,0 +1,7 @@
+1. **EventEmitter and Observer Pattern**
+
+EventEmitter is similar to the Observer Pattern because an event can have multiple listeners. The listeners wait for a particular event and perform an action when that event occurs. In EventEmitter, we use `on()` to register listeners and `emit()` to trigger the event. This makes different parts of a program communicate without directly depending on each other. It is useful for building event-driven applications.
+
+2. **Node.js API Using the Same Pattern**
+
+One example is the Node.js `fs.watch()` API. It watches a file or folder and emits events when something changes. We can attach listeners using methods like `on()` to respond to these changes. This is similar to the Observer Pattern because the listener observes the file system and reacts when an event occurs.
