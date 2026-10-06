@@ -24,8 +24,7 @@ const books = [
     { id: 3, title: "JavaScript Guide" }
 ];
 
-const server = http.createServer((req, res) => {
-
+function handler(req, res) {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
     const query = parsedUrl.query;
@@ -270,8 +269,12 @@ const server = http.createServer((req, res) => {
         <h1>404 - Page Not Found</h1>
         <p>The requested route does not exist.</p>
     `);
-});
+}
 
-server.listen(3000, () => {
-    console.log("Server running at http://localhost:3000");
-});
+module.exports = handler;
+
+if (require.main === module) {
+    http.createServer(handler).listen(3000, () => {
+        console.log("Server running at http://localhost:3000");
+    });
+}

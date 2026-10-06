@@ -23,7 +23,7 @@ const items = [
     { id: 5, name: "Ikigai", type: "Book" }
 ];
 
-const server = http.createServer((req, res) => {
+function handler(req, res) {
 
     res.setHeader('Content-Type', 'application/json');
 
@@ -90,8 +90,12 @@ const server = http.createServer((req, res) => {
         res.writeHead(404);
         res.end(JSON.stringify({ error: "Route not found" }));
     }
-});
+}
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
+module.exports = handler;
+
+if (require.main === module) {
+    http.createServer(handler).listen(3000, () => {
+        console.log("Server running on port 3000");
+    });
+}

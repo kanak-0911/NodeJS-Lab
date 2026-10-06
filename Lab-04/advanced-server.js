@@ -16,7 +16,7 @@ const students = [
     { id: 12, name: "Yadev", course: "BIT", marks: 61 }
 ];
 
-const server = http.createServer((req, res) => {
+function handler(req, res) {
     res.setHeader('Content-Type', 'application/json');
 
     const parsedUrl = url.parse(req.url, true);
@@ -115,8 +115,12 @@ const server = http.createServer((req, res) => {
             error: "Route not found"
         }));
     }
-});
+}
 
-server.listen(3000, () => {
-    console.log("Server running on port 3000");
-});
+module.exports = handler;
+
+if (require.main === module) {
+    http.createServer(handler).listen(3000, () => {
+        console.log("Server running on port 3000");
+    });
+}

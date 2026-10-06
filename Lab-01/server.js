@@ -57,7 +57,7 @@ const labs = [
     }
 ];
 
-const server = http.createServer((req, res) => {
+function handler(req, res) {
 
     if (req.url === "/") {
 
@@ -470,8 +470,12 @@ const server = http.createServer((req, res) => {
         <p>The requested page does not exist.</p>
     `);
 
-});
+}
 
-server.listen(3000, () => {
-    console.log("Main Lab Dashboard running at http://localhost:3000");
-});
+module.exports = handler;
+
+if (require.main === module) {
+    http.createServer(handler).listen(3000, () => {
+        console.log("Main Lab Dashboard running at http://localhost:3000");
+    });
+}
