@@ -120,6 +120,22 @@ const labs = [
             "Error Handling",
             "Event-Driven Programming"
         ]
+    },
+
+    {
+        number: "08",
+        title: "Integrated Node.js Lab Server",
+        task: "Integrating Lab 01 to Lab 07 into one Node.js server",
+        description:
+            "Integrated all previous labs into a single server with routing, source code viewing, script execution, screenshots, logging and APIs.",
+        concepts: [
+            "Integration",
+            "Routing",
+            "Modules",
+            "Logging",
+            "APIs",
+            "Security"
+        ]
     }
 
 ];
@@ -1394,7 +1410,90 @@ Delivery Log: Order ORD101 delivery completed.
         }
 
 
+        // ==============================================
+        // LAB 08
+        // ==============================================
+
+        if (number === "08") {
+
+            extra = `
+
+                <h2>
+                    Integrated Node.js Lab Server
+                </h2>
+
+                <br>
+
+                <p>
+                    This lab integrates Lab 01 to Lab 07
+                    into one Node.js server.
+                </p>
+
+                <h3>
+                    Features
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Single portal for all previous labs
+                    </li>
+
+                    <li>
+                        Routing and lab navigation
+                    </li>
+
+                    <li>
+                        Source code viewing
+                    </li>
+
+                    <li>
+                        Script execution
+                    </li>
+
+                    <li>
+                        Screenshots and outputs
+                    </li>
+
+                    <li>
+                        Request logging using EventEmitter
+                    </li>
+
+                    <li>
+                        Dashboard API
+                    </li>
+
+                    <li>
+                        Error handling and security
+                    </li>
+
+                </ul>
+
+                <h3>
+                    Lab 08 Routes
+                </h3>
+
+                <pre>
+GET /              - Main portal
+GET /about         - About page
+GET /health        - Health check
+GET /labs          - All labs
+GET /labs/:id      - Lab details
+GET /api/dashboard - Dashboard statistics
+                </pre>
+
+                <p>
+                    Lab 08 combines the concepts learned
+                    in Lab 01 to Lab 07 into a single
+                    integrated Node.js application.
+                </p>
+
+            `;
+        }
+
+
         res.writeHead(200);
+
 
 
         res.end(
