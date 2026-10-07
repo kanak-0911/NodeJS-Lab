@@ -1,6 +1,10 @@
 const http = require("http");
 const url = require("url");
 
+const EventEmitter = require("events");
+const fs = require("fs");
+const { execFile } = require("child_process");
+
 const students = [
     { id: 1, name: "Gauri", course: "BCA", marks: 72 },
     { id: 2, name: "Kanak", course: "BCA", marks: 85 },
@@ -16,6 +20,33 @@ const students = [
     { id: 12, name: "Yadev", course: "BIT", marks: 61 }
 ];
 
+
+// ======================================================
+// REQUEST LOGGER
+// ======================================================
+
+const logger = new EventEmitter();
+
+logger.on("request", (method, path) => {
+
+    const logMessage =
+        `[${new Date().toLocaleString()}] ${method} ${path}\n`;
+
+    console.log(logMessage.trim());
+
+    fs.appendFile(
+        "Lab-08/logs/server.log",
+        logMessage,
+        (error) => {
+
+            if (error) {
+                console.log("Log file error:", error.message);
+            }
+
+        }
+    );
+
+});
 
 // ======================================================
 // LAB DATA
@@ -476,6 +507,249 @@ footer {
 
 }
 
+/* ================= LAB 08 PROJECT ================= */
+
+.project-header {
+    background: linear-gradient(135deg, #1e1e1e, #263238);
+    color: white;
+    padding: 35px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border-left: 5px solid #68a063;
+}
+
+.project-badge {
+    display: inline-block;
+    background: #68a063;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.project-header h2 {
+    color: white;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.project-intro {
+    color: #d7ded9;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+
+/* ================= INFO CARDS ================= */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.info-card {
+    background: #f8faf8;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid #68a063;
+}
+
+.info-card h3 {
+    color: #3f7041;
+    margin-bottom: 15px;
+}
+
+.info-card p,
+.info-card li {
+    color: #5f6b65;
+    line-height: 1.7;
+}
+
+.info-card ul {
+    padding-left: 20px;
+}
+
+
+/* ================= SECTION CARDS ================= */
+
+.section-card {
+    background: #ffffff;
+    margin-top: 25px;
+    padding: 28px;
+    border-radius: 14px;
+    border: 1px solid #e1e6e2;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+}
+
+.section-card h3 {
+    color: #3f7041;
+    margin-bottom: 15px;
+}
+
+.section-card p {
+    color: #5f6b65;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.section-card ul {
+    padding-left: 22px;
+}
+
+.section-card li {
+    color: #5f6b65;
+    line-height: 1.8;
+}
+
+
+/* ================= TECHNOLOGIES ================= */
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-grid span {
+    background: #e8f3e9;
+    color: #3f7041;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+
+/* ================= FEATURES ================= */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.feature-item {
+    background: #f8faf8;
+    padding: 20px;
+    border-radius: 10px;
+    border-top: 3px solid #68a063;
+}
+
+.feature-item strong {
+    color: #3f7041;
+}
+
+.feature-item p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+
+/* ================= ROUTES ================= */
+
+.route-table {
+    border: 1px solid #e1e6e2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.route-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 13px 16px;
+    border-bottom: 1px solid #e1e6e2;
+    gap: 15px;
+}
+
+.route-row:last-child {
+    border-bottom: none;
+}
+
+.route-head {
+    background: #1e1e1e;
+    color: white;
+    font-weight: bold;
+}
+
+.route-row code {
+    color: #3f7041;
+    font-weight: bold;
+}
+
+
+/* ================= PROJECT STATS ================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.stat-box {
+    background: #e8f3e9;
+    padding: 22px 10px;
+    border-radius: 12px;
+    text-align: center;
+    border-bottom: 4px solid #68a063;
+}
+
+.stat-box strong {
+    display: block;
+    color: #3f7041;
+    font-size: 30px;
+    margin-bottom: 7px;
+}
+
+.stat-box span {
+    color: #5f6b65;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/* ================= CONCLUSION ================= */
+
+.conclusion {
+    border-left: 5px solid #68a063;
+    background: #f8faf8;
+}
+
+
+/* ================= LAB 08 MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-header {
+        padding: 25px;
+    }
+
+    .project-header h2 {
+        font-size: 24px;
+    }
+
+    .route-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
 </style>
 
 </head>
@@ -522,6 +796,7 @@ ${content}
 // ======================================================
 
 const server = http.createServer((req, res) => {
+    logger.emit("request", req.method, req.url);
 
     const parsedUrl = url.parse(req.url, true);
 
@@ -1412,89 +1687,347 @@ Delivery Log: Order ORD101 delivery completed.
 
         // ==============================================
         // LAB 08
-        // ==============================================
+        // =============================================
 
         if (number === "08") {
 
             extra = `
 
-                <h2>
-                    Integrated Node.js Lab Server
-                </h2>
+                <div class="project-header">
 
-                <br>
+                    <div class="project-badge">
+                        NODE.JS INTEGRATION PROJECT
+                    </div>
 
-                <p>
-                    This lab integrates Lab 01 to Lab 07
-                    into one Node.js server.
-                </p>
+                    <h2>
+                        Integrated Node.js Lab Server
+                    </h2>
 
-                <h3>
-                    Features
-                </h3>
+                    <p class="project-intro">
+                        A single Node.js server that brings together
+                        the concepts, applications and outputs developed
+                        throughout Lab 01 to Lab 07.
+                    </p>
 
-                <ul>
+                </div>
 
-                    <li>
-                        Single portal for all previous labs
-                    </li>
 
-                    <li>
-                        Routing and lab navigation
-                    </li>
+                <div class="info-grid">
 
-                    <li>
-                        Source code viewing
-                    </li>
+                    <div class="info-card">
 
-                    <li>
-                        Script execution
-                    </li>
+                        <h3>📌 Problem Statement</h3>
 
-                    <li>
-                        Screenshots and outputs
-                    </li>
+                        <p>
+                            The previous labs were developed separately,
+                            making it difficult to access different
+                            applications, source files and outputs
+                            from one place.
+                        </p>
 
-                    <li>
-                        Request logging using EventEmitter
-                    </li>
+                        <p>
+                            A single integrated server was required
+                            to organize and provide access to all
+                            laboratory work.
+                        </p>
 
-                    <li>
-                        Dashboard API
-                    </li>
+                    </div>
 
-                    <li>
-                        Error handling and security
-                    </li>
 
-                </ul>
+                    <div class="info-card">
 
-                <h3>
-                    Lab 08 Routes
-                </h3>
+                        <h3>🎯 Objective</h3>
 
-                <pre>
-GET /              - Main portal
-GET /about         - About page
-GET /health        - Health check
-GET /labs          - All labs
-GET /labs/:id      - Lab details
-GET /api/dashboard - Dashboard statistics
-                </pre>
+                        <ul>
 
-                <p>
-                    Lab 08 combines the concepts learned
-                    in Lab 01 to Lab 07 into a single
-                    integrated Node.js application.
-                </p>
+                            <li>
+                                Integrate Lab 01 to Lab 07 into one server.
+                            </li>
+
+                            <li>
+                                Provide simple routes for accessing labs.
+                            </li>
+
+                            <li>
+                                Execute selected Node.js scripts safely.
+                            </li>
+
+                            <li>
+                                Provide APIs for server information.
+                            </li>
+
+                            <li>
+                                Maintain request logs and handle errors.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>💡 Proposed Solution</h3>
+
+                    <p>
+                        Lab 08 uses the Node.js HTTP Server,
+                        routing, File System, EventEmitter and
+                        Child Process modules to create one
+                        integrated laboratory portal.
+                    </p>
+
+                    <p>
+                        Users can navigate between labs, view lab
+                        information, access screenshots, run selected
+                        scripts and check server statistics through APIs.
+                    </p>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>🛠 Technologies Used</h3>
+
+                    <div class="tech-grid">
+
+                        <span>Node.js</span>
+                        <span>HTTP Module</span>
+                        <span>File System</span>
+                        <span>EventEmitter</span>
+                        <span>Child Process</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JSON</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>⭐ Key Features</h3>
+
+                    <div class="feature-grid">
+
+                        <div class="feature-item">
+                            <strong>🔗 Lab Integration</strong>
+
+                            <p>
+                                Provides one portal for Lab 01 to Lab 07.
+                            </p>
+                        </div>
+
+
+                        <div class="feature-item">
+                            <strong>⚡ Script Execution</strong>
+
+                            <p>
+                                Runs selected Node.js scripts through routes.
+                            </p>
+                        </div>
+
+
+                        <div class="feature-item">
+                            <strong>📊 Dashboard API</strong>
+
+                            <p>
+                                Provides server and laboratory statistics.
+                            </p>
+                        </div>
+
+
+                        <div class="feature-item">
+                            <strong>📝 Request Logging</strong>
+
+                            <p>
+                                Records server requests using EventEmitter.
+                            </p>
+                        </div>
+
+
+                        <div class="feature-item">
+                            <strong>🖼 Screenshot Viewer</strong>
+
+                            <p>
+                                Provides access to laboratory screenshots.
+                            </p>
+                        </div>
+
+
+                        <div class="feature-item">
+                            <strong>🔒 Security</strong>
+
+                            <p>
+                                Only approved scripts can be executed.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>🔗 Important Routes & APIs</h3>
+
+                    <div class="route-table">
+
+                        <div class="route-row route-head">
+                            <span>Route</span>
+                            <span>Purpose</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/</code>
+                            <span>Main Lab Portal</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/about</code>
+                            <span>About the project</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/health</code>
+                            <span>Server health check</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/labs</code>
+                            <span>View all labs</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/labs/:id</code>
+                            <span>View individual lab details</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/labs/:id/run</code>
+                            <span>Execute an approved script</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/api/dashboard</code>
+                            <span>Dashboard statistics</span>
+                        </div>
+
+
+                        <div class="route-row">
+                            <code>/screenshots/:name</code>
+                            <span>View lab screenshots</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>📈 Project Statistics</h3>
+
+                    <div class="stats-grid">
+
+                        <div class="stat-box">
+                            <strong>8</strong>
+                            <span>Total Labs</span>
+                        </div>
+
+
+                        <div class="stat-box">
+                            <strong>4</strong>
+                            <span>Server Labs</span>
+                        </div>
+
+
+                        <div class="stat-box">
+                            <strong>3</strong>
+                            <span>Script Labs</span>
+                        </div>
+
+
+                        <div class="stat-box">
+                            <strong>23</strong>
+                            <span>Screenshots</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-card">
+
+                    <h3>📚 What I Learned</h3>
+
+                    <ul>
+
+                        <li>
+                            Creating and managing Node.js HTTP servers.
+                        </li>
+
+                        <li>
+                            Building routes and REST-style APIs.
+                        </li>
+
+                        <li>
+                            Working with files and directories.
+                        </li>
+
+                        <li>
+                            Using EventEmitter for request logging.
+                        </li>
+
+                        <li>
+                            Executing Node.js programs using Child Process.
+                        </li>
+
+                        <li>
+                            Applying basic security and error handling.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="section-card conclusion">
+
+                    <h3>✅ Conclusion</h3>
+
+                    <p>
+                        Lab 08 combines the major concepts learned
+                        throughout the Node.js laboratory into one
+                        integrated application. It provides a single
+                        place to access labs, APIs, scripts, screenshots
+                        and server information.
+                    </p>
+
+                </div>
 
             `;
+
         }
 
 
+        // ==============================================
+        // DISPLAY LAB PAGE
+        // ==============================================
+
         res.writeHead(200);
-
-
 
         res.end(
 
@@ -1512,52 +2045,24 @@ GET /api/dashboard - Dashboard statistics
                             LAB ${lab.number}
                         </div>
 
-
                         <h1>
                             ${lab.title}
                         </h1>
-
-
-                        <br>
-
 
                         <p>
                             <strong>Task:</strong>
                             ${lab.task}
                         </p>
 
-
-                        <br>
-
-
                         <p>
                             ${lab.description}
                         </p>
 
-
                         <br>
-
-
-                        <div>
-
-                            ${lab.concepts
-                                .map(
-                                    c =>
-                                        `<span class="tag">${c}</span>`
-                                )
-                                .join("")}
-
-                        </div>
-
-
-                        <br>
-
 
                         ${extra}
 
-
                         <br>
-
 
                         <a
                             class="button"
@@ -1571,12 +2076,268 @@ GET /api/dashboard - Dashboard statistics
                 </main>
 
                 `
+
             )
 
         );
 
         return;
+
     }
+
+    // ==================================================
+// HEALTH CHECK
+// ==================================================
+
+if (pathname === "/health") {
+
+    res.writeHead(200, {
+        "Content-Type": "application/json"
+    });
+
+    res.end(
+        JSON.stringify({
+            status: "OK",
+            message: "Node.js Lab Server is running",
+            timestamp: new Date().toISOString()
+        })
+    );
+
+    return;
+}
+
+// ==================================================
+// ALL LABS API
+// ==================================================
+
+if (pathname === "/labs") {
+
+    res.writeHead(200, {
+        "Content-Type": "application/json"
+    });
+
+    res.end(
+        JSON.stringify(labs, null, 2)
+    );
+
+    return;
+}
+
+// ==================================================
+// SCRIPT EXECUTION
+// ==================================================
+
+if (pathname.startsWith("/labs/") && pathname.endsWith("/run")) {
+
+    const parts = pathname.split("/");
+    const labNumber = parts[2];
+    const fileName = query.file;
+
+    if (!fileName) {
+
+        res.writeHead(400, {
+            "Content-Type": "application/json"
+        });
+
+        res.end(JSON.stringify({
+            error: "Please provide a file name"
+        }));
+
+        return;
+    }
+
+    const allowedFiles = {
+        "05": [
+            "callbacks.js",
+            "promises.js",
+            "async-await.js"
+        ],
+        "06": [
+            "read-async.js",
+            "read-sync.js",
+            "write-file.js",
+            "append-file.js",
+            "delete-file.js"
+        ],
+        "07": [
+            "events-basic.js",
+            "once-only-listener.js",
+            "error-handling.js",
+            "multiple-listeners.js"
+        ]
+    };
+
+    if (
+        !allowedFiles[labNumber] ||
+        !allowedFiles[labNumber].includes(fileName)
+    ) {
+
+        res.writeHead(403, {
+            "Content-Type": "application/json"
+        });
+
+        res.end(JSON.stringify({
+            error: "This file is not allowed to run"
+        }));
+
+        return;
+    }
+
+    const filePath = `Lab-${labNumber}/${fileName}`;
+
+    execFile(
+        "node",
+        [fileName],
+        {
+            timeout: 5000,
+            cwd: `Lab-${labNumber}`
+        },
+        (error, stdout, stderr) => {
+
+            res.writeHead(
+                error ? 500 : 200,
+                {
+                    "Content-Type": "application/json"
+                }
+            );
+
+            res.end(JSON.stringify({
+                file: fileName,
+                output: stdout,
+                error: stderr || null
+            }, null, 2));
+
+        }
+    );
+
+    return;
+}
+
+// ==================================================
+// SINGLE LAB API
+// ==================================================
+
+if (pathname.startsWith("/labs/")) {
+
+    const labNumber = pathname.split("/")[2];
+
+    const lab = labs.find(
+        l => l.number === labNumber
+    );
+
+    if (!lab) {
+
+        res.writeHead(404, {
+            "Content-Type": "application/json"
+        });
+
+        res.end(
+            JSON.stringify({
+                error: "Lab not found"
+            })
+        );
+
+        return;
+    }
+
+    res.writeHead(200, {
+        "Content-Type": "application/json"
+    });
+
+    res.end(
+        JSON.stringify(lab, null, 2)
+    );
+
+    return;
+}
+
+// ==================================================
+// DASHBOARD API
+// ==================================================
+
+if (pathname === "/api/dashboard") {
+
+    const bcaStudents =
+        students.filter(s => s.course === "BCA").length;
+
+    const bitStudents =
+        students.filter(s => s.course === "BIT").length;
+
+    let screenshotCount = 0;
+
+    try {
+        screenshotCount =
+            fs.readdirSync("Lab-08/public/screenshots").length;
+    } catch (error) {
+        screenshotCount = 0;
+    }
+
+    let logLines = 0;
+
+    try {
+        const logData =
+            fs.readFileSync("Lab-08/logs/server.log", "utf8");
+
+        logLines =
+            logData.split("\n").filter(line => line.trim() !== "").length;
+    } catch (error) {
+        logLines = 0;
+    }
+
+    res.writeHead(200, {
+        "Content-Type": "application/json"
+    });
+
+    res.end(
+        JSON.stringify({
+            server: "Node.js Lab Server",
+            status: "Running",
+            totalLabs: labs.length,
+            serverLabs: 4,
+            scriptLabs: 3,
+            screenshots: screenshotCount,
+            logLines: logLines,
+            totalStudents: students.length,
+            bcaStudents: bcaStudents,
+            bitStudents: bitStudents
+        }, null, 2)
+    );
+
+    return;
+}
+
+// ==================================================
+// SCREENSHOT VIEWING
+// ==================================================
+
+if (pathname.startsWith("/screenshots/")) {
+
+    const imageName = pathname.split("/")[2];
+
+    const imagePath = `Lab-08/public/screenshots/${imageName}`;
+
+    try {
+
+        const image = fs.readFileSync(imagePath);
+
+        res.writeHead(200, {
+            "Content-Type": "image/png"
+        });
+
+        res.end(image);
+
+    } catch (error) {
+
+        res.writeHead(404, {
+            "Content-Type": "text/plain"
+        });
+
+        res.end("Screenshot not found.");
+
+    }
+
+    return;
+}
 
 
     // ==================================================
@@ -2041,12 +2802,11 @@ GET /api/dashboard - Dashboard statistics
     }
 
 
-    // ==================================================
+        // ==================================================
     // 404
     // ==================================================
 
     res.writeHead(404);
-
 
     res.end(
 
@@ -2064,14 +2824,11 @@ GET /api/dashboard - Dashboard statistics
                         404 - Page Not Found
                     </h1>
 
-
                     <br>
-
 
                     <p>
                         The requested route does not exist.
                     </p>
-
 
                     <a
                         class="button"
@@ -2090,6 +2847,7 @@ GET /api/dashboard - Dashboard statistics
     );
 
 });
+
 
 
 // ======================================================

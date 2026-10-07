@@ -1,20 +1,30 @@
 # Lab 08 - Integrated Node.js Lab Server
 
-This lab integrates Lab 01 to Lab 07 into one Node.js server.
+This lab integrates Lab 01 to Lab 07 into one Node.js server. It provides a single place to access lab information, APIs, screenshots, logs and selected script outputs.
+
+## Problem Statement
+
+The previous Node.js labs were developed separately. It was difficult to access different lab work, source files, outputs and screenshots from one place.
+
+Therefore, an integrated Node.js server was created to organize and connect the previous laboratory work through one application.
 
 ## Objective
 
-The main objective of Lab 08 is to create a single Node.js server that can access and demonstrate the work completed in previous labs.
+The main objectives of Lab 08 are:
 
-The server provides:
+* Integrate Lab 01 to Lab 07 into one server.
+* Provide routes to access laboratory information.
+* Provide APIs for server and dashboard information.
+* Execute selected Node.js scripts safely.
+* Display laboratory screenshots.
+* Maintain request logs.
+* Apply basic security and error handling.
 
-* Lab information and source code
-* Server-based lab routes
-* Script execution for selected labs
-* Screenshots of lab work
-* Health and dashboard APIs
-* Request logging
-* Error handling and security
+## Proposed Solution
+
+The solution is an integrated Node.js server that uses HTTP routing, File System, EventEmitter and Child Process modules.
+
+The server provides a dashboard where users can access the laboratory work and also provides APIs for health checking, lab information and project statistics.
 
 ## Technologies Used
 
@@ -23,142 +33,223 @@ The server provides:
 * File System Module
 * EventEmitter
 * Child Process
-* `require()` and `module.exports`
-* `slugify`
-* HTML, CSS and JSON
+* `require()` and modules
+* HTML
+* CSS
+* JSON
 
 ## Lab Structure
 
 The integrated server contains the following labs:
 
-### Lab 01
+### Lab 01 - Node.js HTTP Server
 
-**Node.js HTTP Server**
+Created a basic HTTP server and worked with routes, requests and responses.
 
-Basic HTTP server and routing using Node.js.
+### Lab 02 - Node.js Fundamentals
 
-### Lab 02
+Worked with Node.js basics, modules and core concepts.
 
-**Node.js Fundamentals**
+### Lab 03 - Student Directory API
 
-Node.js fundamentals, modules, routes and JSON responses.
+Created a Student Directory API using student data, routes, arrays, objects and JSON.
 
-### Lab 03
+### Lab 04 - Advanced Student API
 
-**Student Directory**
+Implemented filtering, searching, sorting and query parameters.
 
-Student data, routes and HTTP responses.
+### Lab 05 - Food Delivery Tracker
 
-### Lab 04
+Demonstrated callbacks, Promises, Promise chaining, async/await and Promise.all().
 
-**Advanced Student Server**
+### Lab 06 - File System Module
 
-Filtering, searching, sorting and query parameters.
+Worked with reading, writing, appending and deleting files using the Node.js File System module.
 
-### Lab 05
+### Lab 07 - EventEmitter and Event-Driven Programming
 
-**Food Delivery Tracker**
+Implemented custom events, multiple listeners, once-only listeners and error handling using EventEmitter.
 
-Demonstrates callbacks, promises, promise chaining, async-await and concurrent operations.
+### Lab 08 - Integrated Node.js Lab Server
 
-### Lab 06
+Combined the previous laboratory concepts into one integrated Node.js server with routing, APIs, logging, screenshots, script execution and security.
 
-**File System Module**
+## Key Features
 
-Demonstrates reading, writing, appending and deleting files using the Node.js File System module.
+### 1. Lab Integration
 
-### Lab 07
+Provides one central server for accessing Lab 01 to Lab 07.
 
-**EventEmitter and Event-Driven Programming**
+### 2. Lab Information
 
-Demonstrates EventEmitter, listeners, error handling and event-driven programming.
+The server provides information about each laboratory through routes and APIs.
 
-## Main Routes
+### 3. Script Execution
 
-| Route                         | Purpose                                   |
-| ----------------------------- | ----------------------------------------- |
-| `/`                           | Main Lab 08 portal                        |
-| `/about`                      | About the portfolio                       |
-| `/health`                     | Checks server health                      |
-| `/labs`                       | Displays all labs                         |
-| `/labs/:id`                   | Displays details and source code of a lab |
-| `/labs/:id/run?file=filename` | Runs an allowed script file               |
-| `/labs/:id/app/...`           | Runs routes of server-based labs          |
-| `/screenshots/:name`          | Displays a lab screenshot                 |
-| `/api/dashboard`              | Displays dashboard statistics             |
+Selected Node.js scripts from Lab 05, Lab 06 and Lab 07 can be executed through the server.
+
+### 4. Screenshot Viewer
+
+Laboratory screenshots are stored and can be accessed through the screenshot route.
+
+### 5. Health API
+
+The `/health` route checks whether the Node.js Lab Server is running.
+
+### 6. Dashboard API
+
+The `/api/dashboard` route provides statistics about the integrated project.
+
+### 7. Request Logging
+
+Each request is logged using EventEmitter and the File System module.
+
+### 8. Security
+
+Only approved script files can be executed. Other files are rejected by the server.
+
+## Main Routes and APIs
+
+| Route                         | Purpose                             |
+| ----------------------------- | ----------------------------------- |
+| `/`                           | Main Node.js Lab dashboard          |
+| `/about`                      | About the portfolio                 |
+| `/health`                     | Checks server health                |
+| `/labs`                       | Displays all labs                   |
+| `/labs/:id`                   | Displays individual lab information |
+| `/labs/:id/run?file=filename` | Executes an approved script         |
+| `/screenshots/:name`          | Displays a laboratory screenshot    |
+| `/api/dashboard`              | Displays project statistics         |
 
 ## Security
 
 The server does not allow arbitrary files to be executed.
 
-Only the files listed for a particular lab in `labs.js` can be executed. This prevents users from running other files through the URL.
+A list of approved files is maintained for each script-based lab. If a requested file is not present in the allowed list, the server returns:
 
-Invalid routes return a JSON 404 response.
+```json
+{
+  "error": "This file is not allowed to run"
+}
+```
 
-Unexpected server errors are handled so that the server does not crash.
+This prevents unauthorized files from being executed through the URL.
+
+Invalid lab routes are also handled with appropriate error responses.
 
 ## Request Logging
 
-A custom logger is implemented using Node.js `EventEmitter` and the File System module.
+A custom request logger is implemented using Node.js `EventEmitter`.
 
-Each request is logged with:
+For each request, the following information is recorded:
 
 * Date and time
-* Request method
+* HTTP request method
 * Requested URL
 
 The logs are stored in:
 
-`Lab-08/logs/server.log`
-
-## Server Configuration
-
-The server uses:
-
 ```text
-PORT = process.env.PORT || 3000
+Lab-08/logs/server.log
 ```
 
-The server listens on:
+This makes it possible to monitor requests received by the server.
+
+## Dashboard Statistics
+
+The dashboard API provides information such as:
+
+* Total labs
+* Server labs
+* Script labs
+* Number of screenshots
+* Number of log lines
+* Total students
+* BCA students
+* BIT students
+
+Example project statistics during testing:
 
 ```text
-0.0.0.0
+Total Labs       : 8
+Server Labs      : 4
+Script Labs      : 3
+Screenshots      : 23+
+Total Students   : 12
+BCA Students     : 6
+BIT Students     : 6
 ```
 
-This allows the application to run locally and also on a deployment platform such as Render.
+The number of log lines increases whenever new requests are made to the server.
 
 ## Screenshots
 
-Screenshots of the labs are stored in:
-
-`Lab-08/public/screenshots`
-
-They are used to show the output and work completed in previous labs.
-
-## Running the Project
-
-From the main `NodeJS-Lab` folder, run:
-
-```bash
-node Lab-08/server.js
-```
-
-Then open:
+All laboratory screenshots are stored in:
 
 ```text
-http://localhost:3000
+Lab-08/public/screenshots
 ```
 
-## Dashboard API
+Final Lab 08 screenshots include:
 
-The `/api/dashboard` route provides information such as:
+* `lab08-dashboard.png`
+* `lab08-health.png`
+* `lab08-labs-api.png`
+* `lab08-lab-details.png`
+* `lab08-dashboard-api.png`
+* `lab08-script-execution.png`
+* `lab08-security.png`
 
-* Total number of labs
-* Number of server labs
-* Number of script labs
-* Number of screenshots
-* Number of log lines
+These screenshots provide evidence of the working dashboard, APIs, script execution and security feature.
+
+## Server Configuration
+
+The integrated server is currently run locally on:
+
+```text
+http://localhost:4000
+```
+
+The server is started using:
+
+```bash
+node server.js
+```
+
+from the main `NodeJS-Lab` folder.
+
+## Testing Performed
+
+The following features were tested successfully:
+
+* `/health` API
+* `/labs` API
+* `/labs/08` API
+* `/api/dashboard` API
+* Screenshot route
+* Script execution route
+* Security check for unauthorized files
+* Request logging
+* Lab 08 dashboard UI
+
+## What I Learned
+
+Through Lab 08, I learned:
+
+* How to integrate different Node.js concepts into one project.
+* How to create and manage HTTP routes.
+* How APIs can provide server and project information.
+* How EventEmitter can be used for request logging.
+* How Child Process can execute selected Node.js programs.
+* How File System can be used for logs and screenshots.
+* How to apply basic security checks.
+* How to handle errors and invalid requests.
+* How different Node.js modules can work together in one application.
 
 ## Conclusion
 
-Lab 08 combines the previous Node.js labs into one integrated application. It demonstrates modules, routing, file handling, EventEmitter, child processes, error handling, logging, security and API responses in a single project.
+Lab 08 combines the major concepts learned throughout the Node.js laboratory into one integrated application.
+
+The project provides a single place to access laboratory information, APIs, screenshots and selected script outputs. It also demonstrates request logging, error handling and basic security.
+
+This lab helped me understand how individual Node.js concepts can be combined to build a complete server-based application.
