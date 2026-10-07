@@ -1,4 +1,4 @@
-﻿const http = require("http");
+const http = require("http");
 const url = require("url");
 
 const EventEmitter = require("events");
@@ -778,7 +778,7 @@ ${content}
 
 <footer>
 
-    BCA Semester VII â€¢ Node.js Laboratory â€¢ Kanak
+    BCA Semester VII • Node.js Laboratory • Kanak
 
 </footer>
 
@@ -902,6 +902,151 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+if (pathname === "/lab/01") {
+    const content = `
+        <div class="hero">
+            <div class="badge">LAB 01</div>
+            <h1>Node.js Basics</h1>
+            <p>First Node.js Program, Console Output, Variables and Data Types</p>
+        </div>
+
+        <section class="card">
+            <h2>📌 Problem Statement</h2>
+            <p>
+                The aim of this lab is to understand the basic concepts of Node.js
+                and run the first Node.js program using the command line.
+                The lab also covers console output, variables and basic data types.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🎯 Tasks Performed</h2>
+            <ul>
+                <li>Created and executed the first Node.js program.</li>
+                <li>Displayed student details using console output.</li>
+                <li>Printed different messages using <b>console.log()</b>.</li>
+                <li>Created variables using <b>let</b>.</li>
+                <li>Displayed values stored inside variables.</li>
+                <li>Worked with String, Number, Boolean, Undefined and Null data types.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💡 Solution / Implementation</h2>
+            <p>
+                The lab was implemented using a simple JavaScript file named
+                <b>app.js</b>. Node.js was used to execute the file directly from
+                the terminal.
+            </p>
+
+            <h3>Student Details</h3>
+            <p>
+                The program displays the student's name, scholar number, course,
+                semester and university.
+            </p>
+
+            <h3>Variables</h3>
+            <p>
+                Student information was stored in variables and then displayed
+                using console output.
+            </p>
+
+            <h3>Data Types</h3>
+            <p>
+                Different JavaScript data types were tested including String,
+                Number, Boolean, Undefined and Null.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>📂 Files Used</h2>
+            <ul>
+                <li><b>app.js</b> – Main Node.js program</li>
+                <li><b>package.json</b> – Project configuration</li>
+                <li><b>difference.txt</b> – Difference/reference notes</li>
+                <li><b>node-version.png</b> – Node.js version screenshot</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💻 Program Output</h2>
+
+            <pre class="output">Welcome to Node.js
+Name : Kanak
+Scholar Number : 23145009
+Course : BCA
+Semester : VII
+University : Dev Sanskriti Vishwavidyalaya
+
+Hello Node.js
+Learning Backend Development
+Today's Lab Completed Successfully
+
+--- Student Details Using Variables ---
+Name : Kanak
+Scholar Number : 23145009
+Semester : VII
+Course : BCA
+University : Dev Sanskriti Vishwavidyalaya
+
+--- Data Types ---
+studentName : string
+rollNo : number
+isStudent : boolean
+address : undefined
+marks : object</pre>
+        </section>
+
+       <section class="card">
+    <h2>📸 Screenshot</h2>
+    <p>Node.js version used during the lab:</p>
+
+    <a href="/screenshots/lab01-node-version.png"
+       target="_blank"
+       style="display:inline-block;
+              margin-top:15px;
+              padding:12px 20px;
+              background:#4f46e5;
+              color:white;
+              text-decoration:none;
+              border-radius:8px;">
+        📷 View Lab 01 Screenshot
+    </a>
+</section>
+
+        <section class="card">
+            <h2>📚 What I Learned</h2>
+            <ul>
+                <li>How to run a JavaScript file using Node.js.</li>
+                <li>How <b>console.log()</b> is used to display output.</li>
+                <li>How variables store different types of values.</li>
+                <li>Basic JavaScript data types used in Node.js.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>✅ Conclusion</h2>
+            <p>
+                This lab provided the basic understanding of Node.js and JavaScript.
+                The program was successfully executed and different variables and
+                data types were tested through console output.
+            </p>
+        </section>
+    `;
+
+   res.writeHead(200, {
+    "Content-Type": "text/html; charset=utf-8"
+});
+
+res.end(
+    pageTemplate("Lab 01 - Node.js Basics", content)
+);
+
+return;
+}
+
+
+
 if (pathname === "/lab/03") {
     const content = `
         <div class="hero">
@@ -911,7 +1056,7 @@ if (pathname === "/lab/03") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to create a simple Student Directory API
                 using Node.js. The API should allow users to retrieve student
@@ -921,7 +1066,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Created a Node.js HTTP server.</li>
                 <li>Created a student data collection using JavaScript objects.</li>
@@ -936,7 +1081,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Student Data</h3>
             <p>
@@ -976,7 +1121,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ”— API Routes</h2>
+            <h2>🔗 API Routes</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1007,7 +1152,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’» Example Output</h2>
+            <h2>💻 Example Output</h2>
 
             <pre class="output">[
   {
@@ -1024,7 +1169,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1074,7 +1219,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>How to create a basic HTTP server using Node.js.</li>
                 <li>How API routes work.</li>
@@ -1085,7 +1230,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab helped in understanding how a basic REST-style API can
                 be created using Node.js HTTP module. Different routes were used
@@ -1110,7 +1255,7 @@ if (pathname === "/lab/04") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to develop an advanced Student API using
                 Node.js. The API should allow users to filter, search and sort
@@ -1121,7 +1266,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Created a student API using Node.js HTTP module.</li>
                 <li>Added course-based filtering.</li>
@@ -1136,7 +1281,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Course Filtering</h3>
             <p>
@@ -1177,7 +1322,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ”— Supported Routes & Query Parameters</h2>
+            <h2>🔗 Supported Routes & Query Parameters</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1216,7 +1361,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŒ Example URLs</h2>
+            <h2>🌐 Example URLs</h2>
 
             <pre class="output">/students?course=BCA
 /students?minMarks=60
@@ -1230,7 +1375,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1273,7 +1418,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>How query parameters are used in APIs.</li>
                 <li>How to filter data using JavaScript.</li>
@@ -1285,7 +1430,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab improved the Student API by adding filtering, searching,
                 sorting and input validation. It provided practical understanding
@@ -1310,7 +1455,7 @@ if (pathname === "/lab/04") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to develop an advanced Student API using
                 Node.js. The API should allow users to filter, search and sort
@@ -1321,7 +1466,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Created a student API using Node.js HTTP module.</li>
                 <li>Added course-based filtering.</li>
@@ -1336,7 +1481,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Course Filtering</h3>
             <p>
@@ -1377,7 +1522,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ”— Supported Routes & Query Parameters</h2>
+            <h2>🔗 Supported Routes & Query Parameters</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1416,7 +1561,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŒ Example URLs</h2>
+            <h2>🌐 Example URLs</h2>
 
             <pre class="output">/students?course=BCA
 /students?minMarks=60
@@ -1430,7 +1575,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1473,7 +1618,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>How query parameters are used in APIs.</li>
                 <li>How to filter data using JavaScript.</li>
@@ -1485,7 +1630,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab improved the Student API by adding filtering, searching,
                 sorting and input validation. It provided practical understanding
@@ -1510,7 +1655,7 @@ if (pathname === "/lab/05") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to understand asynchronous programming in
                 Node.js by creating a simple Food Delivery Tracker. Different
@@ -1520,7 +1665,7 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Implemented asynchronous operations using callbacks.</li>
                 <li>Implemented asynchronous operations using Promises.</li>
@@ -1532,7 +1677,7 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Callbacks</h3>
             <p>
@@ -1571,20 +1716,20 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
+            <h2>📂 Files Used</h2>
             <ul>
-                <li><b>callback-version.js</b> â€“ Callback-based implementation</li>
-                <li><b>promise-version.js</b> â€“ Promise-based implementation</li>
-                <li><b>chaining-version.js</b> â€“ Promise chaining implementation</li>
-                <li><b>async-await-version.js</b> â€“ Async/Await implementation</li>
-                <li><b>concurrent-orders.js</b> â€“ Concurrent order processing</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
-                <li><b>reflection-notes.txt</b> â€“ Learning reflection</li>
+                <li><b>callback-version.js</b> – Callback-based implementation</li>
+                <li><b>promise-version.js</b> – Promise-based implementation</li>
+                <li><b>chaining-version.js</b> – Promise chaining implementation</li>
+                <li><b>async-await-version.js</b> – Async/Await implementation</li>
+                <li><b>concurrent-orders.js</b> – Concurrent order processing</li>
+                <li><b>README.md</b> – Lab documentation</li>
+                <li><b>reflection-notes.txt</b> – Learning reflection</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>ðŸ”„ Asynchronous Approaches</h2>
+            <h2>🔄 Asynchronous Approaches</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1630,7 +1775,7 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1673,7 +1818,7 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>Difference between synchronous and asynchronous execution.</li>
                 <li>How callbacks are used in Node.js.</li>
@@ -1685,7 +1830,7 @@ if (pathname === "/lab/05") {
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab provided practical understanding of asynchronous
                 programming in Node.js. Callbacks, Promises, Promise chaining,
@@ -1710,7 +1855,7 @@ if (pathname === "/lab/06") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to understand how Node.js works with files
                 using the built-in File System module. The lab covers reading,
@@ -1720,7 +1865,7 @@ if (pathname === "/lab/06") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Read a file using asynchronous file handling.</li>
                 <li>Read a file using synchronous file handling.</li>
@@ -1735,7 +1880,7 @@ if (pathname === "/lab/06") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Reading Files</h3>
             <p>
@@ -1775,25 +1920,25 @@ if (pathname === "/lab/06") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
+            <h2>📂 Files Used</h2>
             <ul>
-                <li><b>sample.txt</b> â€“ Sample text file</li>
-                <li><b>read-async.js</b> â€“ Asynchronous file reading</li>
-                <li><b>read-sync.js</b> â€“ Synchronous file reading</li>
-                <li><b>write-file.js</b> â€“ File writing</li>
-                <li><b>append-file.js</b> â€“ Appending content</li>
-                <li><b>delete-file.js</b> â€“ File deletion</li>
-                <li><b>async-await-version.js</b> â€“ Async/Await file handling</li>
-                <li><b>add-note.js</b> â€“ Adds a note with timestamp</li>
-                <li><b>read-notes.js</b> â€“ Reads saved notes</li>
-                <li><b>notes.txt</b> â€“ Stores notes</li>
-                <li><b>reflection-notes.txt</b> â€“ Lab reflection</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
+                <li><b>sample.txt</b> – Sample text file</li>
+                <li><b>read-async.js</b> – Asynchronous file reading</li>
+                <li><b>read-sync.js</b> – Synchronous file reading</li>
+                <li><b>write-file.js</b> – File writing</li>
+                <li><b>append-file.js</b> – Appending content</li>
+                <li><b>delete-file.js</b> – File deletion</li>
+                <li><b>async-await-version.js</b> – Async/Await file handling</li>
+                <li><b>add-note.js</b> – Adds a note with timestamp</li>
+                <li><b>read-notes.js</b> – Reads saved notes</li>
+                <li><b>notes.txt</b> – Stores notes</li>
+                <li><b>reflection-notes.txt</b> – Lab reflection</li>
+                <li><b>README.md</b> – Lab documentation</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>ðŸ”„ File System Operations</h2>
+            <h2>🔄 File System Operations</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1835,7 +1980,7 @@ if (pathname === "/lab/06") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’» Example Output</h2>
+            <h2>💻 Example Output</h2>
 
             <pre class="output">This line runs BEFORE the file content is printed.
 
@@ -1847,7 +1992,7 @@ Note added!</pre>
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1869,7 +2014,7 @@ Note added!</pre>
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>How the Node.js File System module works.</li>
                 <li>Difference between synchronous and asynchronous file reading.</li>
@@ -1881,7 +2026,7 @@ Note added!</pre>
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab provided practical understanding of file handling in
                 Node.js. Different File System operations were implemented and
@@ -1905,7 +2050,7 @@ if (pathname === "/lab/07") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>📌 Problem Statement</h2>
             <p>
                 The aim of this lab is to understand event-driven programming in
                 Node.js using the built-in EventEmitter module. The lab demonstrates
@@ -1914,7 +2059,7 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>🎯 Tasks Performed</h2>
             <ul>
                 <li>Created basic events using EventEmitter.</li>
                 <li>Registered event listeners.</li>
@@ -1927,7 +2072,7 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>💡 Solution / Implementation</h2>
 
             <h3>1. Basic EventEmitter</h3>
             <p>
@@ -1975,21 +2120,21 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
+            <h2>📂 Files Used</h2>
             <ul>
-                <li><b>events-basic.js</b> â€“ Basic EventEmitter example</li>
-                <li><b>once-only-listener.js</b> â€“ once() and on() comparison</li>
-                <li><b>error-handling.js</b> â€“ Event error handling</li>
-                <li><b>multiple-listeners.js</b> â€“ Multiple event listeners</li>
-                <li><b>notify-student.js</b> â€“ Notification center</li>
-                <li><b>order-tracker.js</b> â€“ Order tracking using events</li>
-                <li><b>reflection-notes.txt</b> â€“ Lab reflection</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
+                <li><b>events-basic.js</b> – Basic EventEmitter example</li>
+                <li><b>once-only-listener.js</b> – once() and on() comparison</li>
+                <li><b>error-handling.js</b> – Event error handling</li>
+                <li><b>multiple-listeners.js</b> – Multiple event listeners</li>
+                <li><b>notify-student.js</b> – Notification center</li>
+                <li><b>order-tracker.js</b> – Order tracking using events</li>
+                <li><b>reflection-notes.txt</b> – Lab reflection</li>
+                <li><b>README.md</b> – Lab documentation</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>ðŸ”„ Important EventEmitter Methods</h2>
+            <h2>🔄 Important EventEmitter Methods</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -2025,7 +2170,7 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>📸 Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -2082,7 +2227,7 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>📚 What I Learned</h2>
             <ul>
                 <li>How event-driven programming works in Node.js.</li>
                 <li>How EventEmitter creates and manages events.</li>
@@ -2094,7 +2239,7 @@ if (pathname === "/lab/07") {
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>✅ Conclusion</h2>
             <p>
                 This lab provided practical understanding of EventEmitter and
                 event-driven programming in Node.js. Different event listeners,
@@ -2417,7 +2562,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“Œ Problem Statement</h2>
+                    <h2>📌 Problem Statement</h2>
 
                     <p>
                         Create a basic HTTP server using Node.js and handle
@@ -2431,7 +2576,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ› ï¸ Solution / Work Done</h2>
+                    <h2>🛠️ Solution / Work Done</h2>
 
                     <p>
                         A basic HTTP server was created using Node.js.
@@ -2442,23 +2587,23 @@ marks : object
                     <ul>
 
                         <li>
-                            <b>/</b> â€“ Welcome message with student details
+                            <b>/</b> – Welcome message with student details
                         </li>
 
                         <li>
-                            <b>/about</b> â€“ Short introduction
+                            <b>/about</b> – Short introduction
                         </li>
 
                         <li>
-                            <b>/college</b> â€“ College name and semester
+                            <b>/college</b> – College name and semester
                         </li>
 
                         <li>
-                            <b>/profile</b> â€“ Student details in JSON format
+                            <b>/profile</b> – Student details in JSON format
                         </li>
 
                         <li>
-                            <b>Other routes</b> â€“ 404 Page Not Found
+                            <b>Other routes</b> – 404 Page Not Found
                         </li>
 
                     </ul>
@@ -2468,7 +2613,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“š Main Concepts</h2>
+                    <h2>📚 Main Concepts</h2>
 
                     <ul>
 
@@ -2486,7 +2631,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“– What I Learned</h2>
+                    <h2>📖 What I Learned</h2>
 
                     <ul>
 
@@ -2720,13 +2865,13 @@ marks : object
 
                 <pre>
 Order Placed
-      â†“
+      ↓
 Restaurant Processing
-      â†“
+      ↓
 Food Preparation
-      â†“
+      ↓
 Delivery Partner
-      â†“
+      ↓
 Order Delivered
                 </pre>
 
@@ -3043,7 +3188,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                     <div class="info-card">
 
-                        <h3>ðŸ“Œ Problem Statement</h3>
+                        <h3>📌 Problem Statement</h3>
 
                         <p>
                             The previous labs were developed separately,
@@ -3063,7 +3208,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                     <div class="info-card">
 
-                        <h3>ðŸŽ¯ Objective</h3>
+                        <h3>🎯 Objective</h3>
 
                         <ul>
 
@@ -3096,7 +3241,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ’¡ Proposed Solution</h3>
+                    <h3>💡 Proposed Solution</h3>
 
                     <p>
                         Lab 08 uses the Node.js HTTP Server,
@@ -3116,7 +3261,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ›  Technologies Used</h3>
+                    <h3>🛠 Technologies Used</h3>
 
                     <div class="tech-grid">
 
@@ -3136,12 +3281,12 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>â­ Key Features</h3>
+                    <h3>⭐ Key Features</h3>
 
                     <div class="feature-grid">
 
                         <div class="feature-item">
-                            <strong>ðŸ”— Lab Integration</strong>
+                            <strong>🔗 Lab Integration</strong>
 
                             <p>
                                 Provides one portal for Lab 01 to Lab 07.
@@ -3150,7 +3295,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>âš¡ Script Execution</strong>
+                            <strong>⚡ Script Execution</strong>
 
                             <p>
                                 Runs selected Node.js scripts through routes.
@@ -3159,7 +3304,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ“Š Dashboard API</strong>
+                            <strong>📊 Dashboard API</strong>
 
                             <p>
                                 Provides server and laboratory statistics.
@@ -3168,7 +3313,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ“ Request Logging</strong>
+                            <strong>📝 Request Logging</strong>
 
                             <p>
                                 Records server requests using EventEmitter.
@@ -3177,7 +3322,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ–¼ Screenshot Viewer</strong>
+                            <strong>🖼 Screenshot Viewer</strong>
 
                             <p>
                                 Provides access to laboratory screenshots.
@@ -3186,7 +3331,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ”’ Security</strong>
+                            <strong>🔒 Security</strong>
 
                             <p>
                                 Only approved scripts can be executed.
@@ -3200,7 +3345,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ”— Important Routes & APIs</h3>
+                    <h3>🔗 Important Routes & APIs</h3>
 
                     <div class="route-table">
 
@@ -3264,7 +3409,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ“ˆ Project Statistics</h3>
+                    <h3>📈 Project Statistics</h3>
 
                     <div class="stats-grid">
 
@@ -3298,7 +3443,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ“š What I Learned</h3>
+                    <h3>📚 What I Learned</h3>
 
                     <ul>
 
@@ -3333,7 +3478,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card conclusion">
 
-                    <h3>âœ… Conclusion</h3>
+                    <h3>✅ Conclusion</h3>
 
                     <p>
                         Lab 08 combines the major concepts learned
