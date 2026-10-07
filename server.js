@@ -902,6 +902,549 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+if (pathname === "/lab/01") {
+    const content = `
+        <div class="hero">
+            <div class="badge">LAB 01</div>
+            <h1>Node.js Basics</h1>
+            <p>First Node.js Program, Console Output, Variables and Data Types</p>
+        </div>
+
+        <section class="card">
+            <h2>📌 Problem Statement</h2>
+            <p>
+                The aim of this lab is to understand the basic concepts of Node.js
+                and run the first Node.js program using the command line.
+                The lab also covers console output, variables and basic data types.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🎯 Tasks Performed</h2>
+            <ul>
+                <li>Created and executed the first Node.js program.</li>
+                <li>Displayed student details using console output.</li>
+                <li>Printed different messages using <b>console.log()</b>.</li>
+                <li>Created variables using <b>let</b>.</li>
+                <li>Displayed values stored inside variables.</li>
+                <li>Worked with String, Number, Boolean, Undefined and Null data types.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💡 Solution / Implementation</h2>
+            <p>
+                The lab was implemented using a simple JavaScript file named
+                <b>app.js</b>. Node.js was used to execute the file directly from
+                the terminal.
+            </p>
+
+            <h3>Student Details</h3>
+            <p>
+                The program displays the student's name, scholar number, course,
+                semester and university.
+            </p>
+
+            <h3>Variables</h3>
+            <p>
+                Student information was stored in variables and then displayed
+                using console output.
+            </p>
+
+            <h3>Data Types</h3>
+            <p>
+                Different JavaScript data types were tested including String,
+                Number, Boolean, Undefined and Null.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>📂 Files Used</h2>
+            <ul>
+                <li><b>app.js</b> – Main Node.js program</li>
+                <li><b>package.json</b> – Project configuration</li>
+                <li><b>difference.txt</b> – Difference/reference notes</li>
+                <li><b>node-version.png</b> – Node.js version screenshot</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💻 Program Output</h2>
+
+            <pre class="output">Welcome to Node.js
+Name : Kanak
+Scholar Number : 23145009
+Course : BCA
+Semester : VII
+University : Dev Sanskriti Vishwavidyalaya
+
+Hello Node.js
+Learning Backend Development
+Today's Lab Completed Successfully
+
+--- Student Details Using Variables ---
+Name : Kanak
+Scholar Number : 23145009
+Semester : VII
+Course : BCA
+University : Dev Sanskriti Vishwavidyalaya
+
+--- Data Types ---
+studentName : string
+rollNo : number
+isStudent : boolean
+address : undefined
+marks : object</pre>
+        </section>
+
+       <section class="card">
+    <h2>📸 Screenshot</h2>
+    <p>Node.js version used during the lab:</p>
+
+    <a href="/screenshots/lab01-node-version.png"
+       target="_blank"
+       style="display:inline-block;
+              margin-top:15px;
+              padding:12px 20px;
+              background:#4f46e5;
+              color:white;
+              text-decoration:none;
+              border-radius:8px;">
+        📷 View Lab 01 Screenshot
+    </a>
+</section>
+
+        <section class="card">
+            <h2>📚 What I Learned</h2>
+            <ul>
+                <li>How to run a JavaScript file using Node.js.</li>
+                <li>How <b>console.log()</b> is used to display output.</li>
+                <li>How variables store different types of values.</li>
+                <li>Basic JavaScript data types used in Node.js.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>✅ Conclusion</h2>
+            <p>
+                This lab provided the basic understanding of Node.js and JavaScript.
+                The program was successfully executed and different variables and
+                data types were tested through console output.
+            </p>
+        </section>
+    `;
+
+   res.writeHead(200, {
+    "Content-Type": "text/html; charset=utf-8"
+});
+
+res.end(
+    pageTemplate("Lab 01 - Node.js Basics", content)
+);
+
+return;
+}
+
+
+
+if (pathname === "/lab/03") {
+    const content = `
+        <div class="hero">
+            <div class="badge">LAB 03</div>
+            <h1>Student Directory API</h1>
+            <p>Building a Node.js API using HTTP routes and JSON data</p>
+        </div>
+
+        <section class="card">
+            <h2>📌 Problem Statement</h2>
+            <p>
+                The aim of this lab is to create a simple Student Directory API
+                using Node.js. The API should allow users to retrieve student
+                information, filter students by course, search students by ID,
+                and work with another set of items using different routes.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🎯 Tasks Performed</h2>
+            <ul>
+                <li>Created a Node.js HTTP server.</li>
+                <li>Created a student data collection using JavaScript objects.</li>
+                <li>Created an API to return all students.</li>
+                <li>Created a route to return only BCA students.</li>
+                <li>Created a route to find a student using ID.</li>
+                <li>Created an API to return all items.</li>
+                <li>Created a route to find an item using ID.</li>
+                <li>Added error handling for invalid IDs.</li>
+                <li>Added a 404 response for invalid routes.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💡 Solution / Implementation</h2>
+
+            <h3>1. Student Data</h3>
+            <p>
+                A student array was created containing student ID, name and course.
+                The data includes both BCA and BIT students.
+            </p>
+
+            <h3>2. Get All Students</h3>
+            <p>
+                The <b>/students</b> route returns the complete list of students
+                in JSON format.
+            </p>
+
+            <h3>3. Get BCA Students</h3>
+            <p>
+                The <b>/students/course/BCA</b> route uses filtering to return
+                only students whose course is BCA.
+            </p>
+
+            <h3>4. Get Student by ID</h3>
+            <p>
+                The <b>/students/:id</b> route reads the ID from the URL and
+                searches for the matching student.
+            </p>
+
+            <h3>5. Items API</h3>
+            <p>
+                A separate items collection was created. The API provides routes
+                to get all items and to get an individual item by ID.
+            </p>
+
+            <h3>6. Error Handling</h3>
+            <p>
+                If an ID is not a number, the API returns a 400 error.
+                If a student or item does not exist, it returns a 404 error.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🔗 API Routes</h2>
+
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <th style="padding:12px; text-align:left;">Route</th>
+                    <th style="padding:12px; text-align:left;">Purpose</th>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/students</td>
+                    <td style="padding:12px;">Returns all students</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/students/course/BCA</td>
+                    <td style="padding:12px;">Returns BCA students</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/students/:id</td>
+                    <td style="padding:12px;">Returns student by ID</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/items</td>
+                    <td style="padding:12px;">Returns all items</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/items/:id</td>
+                    <td style="padding:12px;">Returns item by ID</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>💻 Example Output</h2>
+
+            <pre class="output">[
+  {
+    "id": 1,
+    "name": "Gauri",
+    "course": "BCA"
+  },
+  {
+    "id": 2,
+    "name": "Kanak",
+    "course": "BCA"
+  }
+]</pre>
+        </section>
+
+        <section class="card">
+            <h2>📸 Lab Screenshots</h2>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
+
+                <div>
+                    <h3>Screenshot 1</h3>
+                    <img src="/screenshots/lab3-1.png"
+                         alt="Lab 03 Screenshot 1"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 2</h3>
+                    <img src="/screenshots/lab3-2.png"
+                         alt="Lab 03 Screenshot 2"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 3</h3>
+                    <img src="/screenshots/lab3-3.png"
+                         alt="Lab 03 Screenshot 3"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 4</h3>
+                    <img src="/screenshots/lab3-4.png"
+                         alt="Lab 03 Screenshot 4"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 5</h3>
+                    <img src="/screenshots/lab3-5.png"
+                         alt="Lab 03 Screenshot 5"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 6</h3>
+                    <img src="/screenshots/lab3-6.png"
+                         alt="Lab 03 Screenshot 6"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>📚 What I Learned</h2>
+            <ul>
+                <li>How to create a basic HTTP server using Node.js.</li>
+                <li>How API routes work.</li>
+                <li>How JSON data is returned from a server.</li>
+                <li>How route parameters are used to find data.</li>
+                <li>How to handle invalid input and missing data.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>✅ Conclusion</h2>
+            <p>
+                This lab helped in understanding how a basic REST-style API can
+                be created using Node.js HTTP module. Different routes were used
+                to retrieve, filter and search student and item data, along with
+                proper error handling.
+            </p>
+        </section>
+    `;
+
+   res.writeHead(200, { "Content-Type": "text/html" });
+res.end(pageTemplate("Lab 03 - Student Directory API", content));
+return;
+}
+
+
+if (pathname === "/lab/04") {
+    const content = `
+        <div class="hero">
+            <div class="badge">LAB 04</div>
+            <h1>Advanced Student API</h1>
+            <p>Filtering, Searching, Sorting and Query Parameters in Node.js</p>
+        </div>
+
+        <section class="card">
+            <h2>📌 Problem Statement</h2>
+            <p>
+                The aim of this lab is to develop an advanced Student API using
+                Node.js. The API should allow users to filter, search and sort
+                student records using route parameters and query parameters.
+                It should also validate incorrect input and return proper error
+                messages.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🎯 Tasks Performed</h2>
+            <ul>
+                <li>Created a student API using Node.js HTTP module.</li>
+                <li>Added course-based filtering.</li>
+                <li>Added minimum marks filtering.</li>
+                <li>Added partial and case-insensitive name searching.</li>
+                <li>Added sorting by student name.</li>
+                <li>Added sorting by marks.</li>
+                <li>Implemented ascending and descending order.</li>
+                <li>Used route parameters with course filtering.</li>
+                <li>Added input validation and error handling.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>💡 Solution / Implementation</h2>
+
+            <h3>1. Course Filtering</h3>
+            <p>
+                Students can be filtered using the <b>course</b> query parameter.
+                For example, <b>/students?course=BCA</b> returns only BCA students.
+            </p>
+
+            <h3>2. Minimum Marks</h3>
+            <p>
+                The <b>minMarks</b> parameter returns students whose marks are
+                greater than or equal to the given value.
+            </p>
+
+            <h3>3. Searching</h3>
+            <p>
+                The <b>search</b> parameter searches student names partially and
+                without considering uppercase or lowercase letters.
+            </p>
+
+            <h3>4. Sorting</h3>
+            <p>
+                Students can be sorted by <b>name</b> or <b>marks</b>.
+                The order can be <b>asc</b> or <b>desc</b>.
+            </p>
+
+            <h3>5. Combined Filters</h3>
+            <p>
+                Multiple query parameters can be used together to filter, search
+                and sort the same student data.
+            </p>
+
+            <h3>6. Input Validation</h3>
+            <p>
+                The server checks the input before processing it. Invalid
+                minMarks, sort fields or order values return a 400 error instead
+                of crashing the server.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>🔗 Supported Routes & Query Parameters</h2>
+
+            <table style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <th style="padding:12px; text-align:left;">Route / Parameter</th>
+                    <th style="padding:12px; text-align:left;">Purpose</th>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/students</td>
+                    <td style="padding:12px;">Returns student data</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">?course=BCA</td>
+                    <td style="padding:12px;">Filters students by course</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">?minMarks=60</td>
+                    <td style="padding:12px;">Filters students by minimum marks</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">?search=a</td>
+                    <td style="padding:12px;">Searches student names</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">?sort=marks&order=desc</td>
+                    <td style="padding:12px;">Sorts marks from highest to lowest</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">?sort=name&order=asc</td>
+                    <td style="padding:12px;">Sorts names alphabetically</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px;">/students/course/BCA</td>
+                    <td style="padding:12px;">Filters using route parameter</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>🌐 Example URLs</h2>
+
+            <pre class="output">/students?course=BCA
+/students?minMarks=60
+/students?search=a
+/students?sort=marks&order=desc
+/students?sort=name&order=asc
+/students/course/BCA?minMarks=60&sort=marks&order=desc
+
+Combined:
+ /students?course=BCA&minMarks=60&search=a&sort=marks&order=desc</pre>
+        </section>
+
+        <section class="card">
+            <h2>📸 Lab Screenshots</h2>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
+
+                <div>
+                    <h3>Screenshot 1</h3>
+                    <img src="/screenshots/lab4-1.png"
+                         alt="Lab 04 Screenshot 1"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 2</h3>
+                    <img src="/screenshots/lab4-2.png"
+                         alt="Lab 04 Screenshot 2"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 3</h3>
+                    <img src="/screenshots/lab4-3.png"
+                         alt="Lab 04 Screenshot 3"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 4</h3>
+                    <img src="/screenshots/lab4-4.png"
+                         alt="Lab 04 Screenshot 4"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+                <div>
+                    <h3>Screenshot 5</h3>
+                    <img src="/screenshots/lab4-5.png"
+                         alt="Lab 04 Screenshot 5"
+                         style="width:100%; border-radius:12px;">
+                </div>
+
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>📚 What I Learned</h2>
+            <ul>
+                <li>How query parameters are used in APIs.</li>
+                <li>How to filter data using JavaScript.</li>
+                <li>How to search student names.</li>
+                <li>How to sort data in ascending and descending order.</li>
+                <li>How to validate API input.</li>
+                <li>How to return proper 400 and 404 error responses.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>✅ Conclusion</h2>
+            <p>
+                This lab improved the Student API by adding filtering, searching,
+                sorting and input validation. It provided practical understanding
+                of how query parameters and route parameters can be used to create
+                a more useful Node.js API.
+            </p>
+        </section>
+    `;
+
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end(pageTemplate("Lab 04 - Advanced Student API", content));
+    return;
+}
+
 
     // ==================================================
     // ABOUT
@@ -1134,31 +1677,71 @@ if (pathname === "/profile") {
         // LAB 01
         // ==============================================
 
-        if (number === "01") {
+       if (number === "01") {
 
-            extra = `
+    extra = `
 
-                <h2>
-                    Node.js HTTP Server
-                </h2>
+        <h2>Problem Statement</h2>
 
-                <br>
+        <p>
+            The aim of this lab was to understand the basics of Node.js
+            by creating the first Node.js program, displaying output,
+            using variables and understanding basic data types.
+        </p>
 
-                <p>
-                    This lab introduced the basics of creating
-                    an HTTP server using Node.js.
-                </p>
+        <br>
 
-                <pre>
-HTTP Server
-Request
-Response
-Routing
-Basic API Responses
-                </pre>
+        <h2>Tasks Performed</h2>
 
-            `;
-        }
+        <ul>
+            <li>Created the first Node.js program.</li>
+            <li>Displayed messages using console.log().</li>
+            <li>Used variables to store student details.</li>
+            <li>Understood basic JavaScript data types.</li>
+        </ul>
+
+        <br>
+
+        <h2>Program Output</h2>
+
+        <pre>
+Welcome to Node.js
+Name : Kanak
+Scholar Number : 23145009
+Course : BCA
+Semester : VII
+University : Dev Sanskriti Vishwavidyalaya
+
+Hello Node.js
+Learning Backend Development
+
+--- Data Types ---
+studentName : string
+rollNo : number
+isStudent : boolean
+address : undefined
+marks : object
+        </pre>
+
+        <br>
+
+        <h2>Screenshot</h2>
+
+<p>
+    <a class="button" href="/screenshots/lab01-node-version.png" target="_blank">
+        View Lab 01 Screenshot
+    </a>
+</p>
+
+        <h2>What I Learned</h2>
+
+        <p>
+            I learned the basics of Node.js, console output,
+            variables and JavaScript data types.
+        </p>
+
+    `;
+}
 
 
         // ==============================================
@@ -1169,23 +1752,104 @@ Basic API Responses
 
             extra = `
 
-                <h2>
-                    Node.js Fundamentals
-                </h2>
+                <section class="card">
 
-                <br>
+                    <h2>📌 Problem Statement</h2>
 
-                <p>
-                    This lab covered basic Node.js concepts,
-                    modules and working with the Node.js runtime.
-                </p>
+                    <p>
+                        Create a basic HTTP server using Node.js and handle
+                        different routes to display student information.
+                        The server should also handle invalid routes with a
+                        404 response and use an environment variable for the port.
+                    </p>
 
-                <pre>
-Node.js
-Modules
-Core Concepts
-JavaScript Runtime
-                </pre>
+                </section>
+
+
+                <section class="card">
+
+                    <h2>🛠️ Solution / Work Done</h2>
+
+                    <p>
+                        A basic HTTP server was created using Node.js.
+                        Different routes were added for displaying personal,
+                        college and profile information.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            <b>/</b> – Welcome message with student details
+                        </li>
+
+                        <li>
+                            <b>/about</b> – Short introduction
+                        </li>
+
+                        <li>
+                            <b>/college</b> – College name and semester
+                        </li>
+
+                        <li>
+                            <b>/profile</b> – Student details in JSON format
+                        </li>
+
+                        <li>
+                            <b>Other routes</b> – 404 Page Not Found
+                        </li>
+
+                    </ul>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h2>📚 Main Concepts</h2>
+
+                    <ul>
+
+                        <li>Node.js HTTP Server</li>
+                        <li>Routing</li>
+                        <li>Request and Response</li>
+                        <li>JSON Response</li>
+                        <li>404 Error Handling</li>
+                        <li>Environment Variable for Port</li>
+
+                    </ul>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h2>📖 What I Learned</h2>
+
+                    <ul>
+
+                        <li>
+                            How to create an HTTP server using Node.js.
+                        </li>
+
+                        <li>
+                            How different URLs can be handled using routes.
+                        </li>
+
+                        <li>
+                            How to send normal and JSON responses.
+                        </li>
+
+                        <li>
+                            How to handle invalid routes using 404 response.
+                        </li>
+
+                        <li>
+                            How an environment variable can be used for the server port.
+                        </li>
+
+                    </ul>
+
+                </section>
 
             `;
         }
