@@ -902,6 +902,151 @@ const server = http.createServer((req, res) => {
         return;
     }
 
+if (pathname === "/lab/01") {
+    const content = `
+        <div class="hero">
+            <div class="badge">LAB 01</div>
+            <h1>Node.js Basics</h1>
+            <p>First Node.js Program, Console Output, Variables and Data Types</p>
+        </div>
+
+        <section class="card">
+            <h2>Problem Statement</h2>
+            <p>
+                The aim of this lab is to understand the basic concepts of Node.js
+                and run the first Node.js program using the command line.
+                The lab also covers console output, variables and basic data types.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Tasks Performed</h2>
+            <ul>
+                <li>Created and executed the first Node.js program.</li>
+                <li>Displayed student details using console output.</li>
+                <li>Printed different messages using <b>console.log()</b>.</li>
+                <li>Created variables using <b>let</b>.</li>
+                <li>Displayed values stored inside variables.</li>
+                <li>Worked with String, Number, Boolean, Undefined and Null data types.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Solution / Implementation</h2>
+            <p>
+                The lab was implemented using a simple JavaScript file named
+                <b>app.js</b>. Node.js was used to execute the file directly from
+                the terminal.
+            </p>
+
+            <h3>Student Details</h3>
+            <p>
+                The program displays the student's name, scholar number, course,
+                semester and university.
+            </p>
+
+            <h3>Variables</h3>
+            <p>
+                Student information was stored in variables and then displayed
+                using console output.
+            </p>
+
+            <h3>Data Types</h3>
+            <p>
+                Different JavaScript data types were tested including String,
+                Number, Boolean, Undefined and Null.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Files Used</h2>
+            <ul>
+                <li><b>app.js</b> â€“ Main Node.js program</li>
+                <li><b>package.json</b> â€“ Project configuration</li>
+                <li><b>difference.txt</b> â€“ Difference/reference notes</li>
+                <li><b>node-version.png</b> â€“ Node.js version screenshot</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Program Output</h2>
+
+            <pre class="output">Welcome to Node.js
+Name : Kanak
+Scholar Number : 23145009
+Course : BCA
+Semester : VII
+University : Dev Sanskriti Vishwavidyalaya
+
+Hello Node.js
+Learning Backend Development
+Today's Lab Completed Successfully
+
+--- Student Details Using Variables ---
+Name : Kanak
+Scholar Number : 23145009
+Semester : VII
+Course : BCA
+University : Dev Sanskriti Vishwavidyalaya
+
+--- Data Types ---
+studentName : string
+rollNo : number
+isStudent : boolean
+address : undefined
+marks : object</pre>
+        </section>
+
+       <section class="card">
+    <h2>Screenshot</h2>
+    <p>Node.js version used during the lab:</p>
+
+    <a href="/screenshots/lab01-node-version.png"
+       target="_blank"
+       style="display:inline-block;
+              margin-top:15px;
+              padding:12px 20px;
+              background:#4f46e5;
+              color:white;
+              text-decoration:none;
+              border-radius:8px;">
+        View Lab 01 Screenshot
+    </a>
+</section>
+
+        <section class="card">
+            <h2>What I Learned</h2>
+            <ul>
+                <li>How to run a JavaScript file using Node.js.</li>
+                <li>How <b>console.log()</b> is used to display output.</li>
+                <li>How variables store different types of values.</li>
+                <li>Basic JavaScript data types used in Node.js.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Conclusion</h2>
+            <p>
+                This lab provided the basic understanding of Node.js and JavaScript.
+                The program was successfully executed and different variables and
+                data types were tested through console output.
+            </p>
+        </section>
+    `;
+
+   res.writeHead(200, {
+    "Content-Type": "text/html; charset=utf-8"
+});
+
+res.end(
+    pageTemplate("Lab 01 - Node.js Basics", content)
+);
+
+return;
+}
+
+
+
 if (pathname === "/lab/03") {
     const content = `
         <div class="hero">
@@ -911,7 +1056,7 @@ if (pathname === "/lab/03") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>Problem Statement</h2>
             <p>
                 The aim of this lab is to create a simple Student Directory API
                 using Node.js. The API should allow users to retrieve student
@@ -921,7 +1066,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>Tasks Performed</h2>
             <ul>
                 <li>Created a Node.js HTTP server.</li>
                 <li>Created a student data collection using JavaScript objects.</li>
@@ -936,7 +1081,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>Solution / Implementation</h2>
 
             <h3>1. Student Data</h3>
             <p>
@@ -976,7 +1121,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ”— API Routes</h2>
+            <h2>API Routes</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1007,7 +1152,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’» Example Output</h2>
+            <h2>Example Output</h2>
 
             <pre class="output">[
   {
@@ -1024,7 +1169,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1074,7 +1219,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>What I Learned</h2>
             <ul>
                 <li>How to create a basic HTTP server using Node.js.</li>
                 <li>How API routes work.</li>
@@ -1085,7 +1230,7 @@ if (pathname === "/lab/03") {
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>Conclusion</h2>
             <p>
                 This lab helped in understanding how a basic REST-style API can
                 be created using Node.js HTTP module. Different routes were used
@@ -1110,7 +1255,7 @@ if (pathname === "/lab/04") {
         </div>
 
         <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
+            <h2>Problem Statement</h2>
             <p>
                 The aim of this lab is to develop an advanced Student API using
                 Node.js. The API should allow users to filter, search and sort
@@ -1121,7 +1266,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
+            <h2>Tasks Performed</h2>
             <ul>
                 <li>Created a student API using Node.js HTTP module.</li>
                 <li>Added course-based filtering.</li>
@@ -1136,7 +1281,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
+            <h2>Solution / Implementation</h2>
 
             <h3>1. Course Filtering</h3>
             <p>
@@ -1177,7 +1322,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸ”— Supported Routes & Query Parameters</h2>
+            <h2>Supported Routes & Query Parameters</h2>
 
             <table style="width:100%; border-collapse:collapse;">
                 <tr>
@@ -1216,7 +1361,7 @@ if (pathname === "/lab/04") {
         </section>
 
         <section class="card">
-            <h2>ðŸŒ Example URLs</h2>
+            <h2>Example URLs</h2>
 
             <pre class="output">/students?course=BCA
 /students?minMarks=60
@@ -1230,7 +1375,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
+            <h2>Lab Screenshots</h2>
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
 
@@ -1273,7 +1418,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
+            <h2>What I Learned</h2>
             <ul>
                 <li>How query parameters are used in APIs.</li>
                 <li>How to filter data using JavaScript.</li>
@@ -1285,7 +1430,7 @@ Combined:
         </section>
 
         <section class="card">
-            <h2>âœ… Conclusion</h2>
+            <h2>Conclusion</h2>
             <p>
                 This lab improved the Student API by adding filtering, searching,
                 sorting and input validation. It provided practical understanding
@@ -1300,814 +1445,6 @@ Combined:
     return;
 }
 
-
-if (pathname === "/lab/04") {
-    const content = `
-        <div class="hero">
-            <div class="badge">LAB 04</div>
-            <h1>Advanced Student API</h1>
-            <p>Filtering, Searching, Sorting and Query Parameters in Node.js</p>
-        </div>
-
-        <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
-            <p>
-                The aim of this lab is to develop an advanced Student API using
-                Node.js. The API should allow users to filter, search and sort
-                student records using route parameters and query parameters.
-                It should also validate incorrect input and return proper error
-                messages.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
-            <ul>
-                <li>Created a student API using Node.js HTTP module.</li>
-                <li>Added course-based filtering.</li>
-                <li>Added minimum marks filtering.</li>
-                <li>Added partial and case-insensitive name searching.</li>
-                <li>Added sorting by student name.</li>
-                <li>Added sorting by marks.</li>
-                <li>Implemented ascending and descending order.</li>
-                <li>Used route parameters with course filtering.</li>
-                <li>Added input validation and error handling.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
-
-            <h3>1. Course Filtering</h3>
-            <p>
-                Students can be filtered using the <b>course</b> query parameter.
-                For example, <b>/students?course=BCA</b> returns only BCA students.
-            </p>
-
-            <h3>2. Minimum Marks</h3>
-            <p>
-                The <b>minMarks</b> parameter returns students whose marks are
-                greater than or equal to the given value.
-            </p>
-
-            <h3>3. Searching</h3>
-            <p>
-                The <b>search</b> parameter searches student names partially and
-                without considering uppercase or lowercase letters.
-            </p>
-
-            <h3>4. Sorting</h3>
-            <p>
-                Students can be sorted by <b>name</b> or <b>marks</b>.
-                The order can be <b>asc</b> or <b>desc</b>.
-            </p>
-
-            <h3>5. Combined Filters</h3>
-            <p>
-                Multiple query parameters can be used together to filter, search
-                and sort the same student data.
-            </p>
-
-            <h3>6. Input Validation</h3>
-            <p>
-                The server checks the input before processing it. Invalid
-                minMarks, sort fields or order values return a 400 error instead
-                of crashing the server.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ”— Supported Routes & Query Parameters</h2>
-
-            <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                    <th style="padding:12px; text-align:left;">Route / Parameter</th>
-                    <th style="padding:12px; text-align:left;">Purpose</th>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">/students</td>
-                    <td style="padding:12px;">Returns student data</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">?course=BCA</td>
-                    <td style="padding:12px;">Filters students by course</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">?minMarks=60</td>
-                    <td style="padding:12px;">Filters students by minimum marks</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">?search=a</td>
-                    <td style="padding:12px;">Searches student names</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">?sort=marks&order=desc</td>
-                    <td style="padding:12px;">Sorts marks from highest to lowest</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">?sort=name&order=asc</td>
-                    <td style="padding:12px;">Sorts names alphabetically</td>
-                </tr>
-                <tr>
-                    <td style="padding:12px;">/students/course/BCA</td>
-                    <td style="padding:12px;">Filters using route parameter</td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="card">
-            <h2>ðŸŒ Example URLs</h2>
-
-            <pre class="output">/students?course=BCA
-/students?minMarks=60
-/students?search=a
-/students?sort=marks&order=desc
-/students?sort=name&order=asc
-/students/course/BCA?minMarks=60&sort=marks&order=desc
-
-Combined:
-/students?course=BCA&minMarks=60&search=a&sort=marks&order=desc</pre>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
-
-                <div>
-                    <h3>Screenshot 1</h3>
-                    <img src="/screenshots/lab4-1.png"
-                         alt="Lab 04 Screenshot 1"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Screenshot 2</h3>
-                    <img src="/screenshots/lab4-2.png"
-                         alt="Lab 04 Screenshot 2"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Screenshot 3</h3>
-                    <img src="/screenshots/lab4-3.png"
-                         alt="Lab 04 Screenshot 3"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Screenshot 4</h3>
-                    <img src="/screenshots/lab4-4.png"
-                         alt="Lab 04 Screenshot 4"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Screenshot 5</h3>
-                    <img src="/screenshots/lab4-5.png"
-                         alt="Lab 04 Screenshot 5"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
-            <ul>
-                <li>How query parameters are used in APIs.</li>
-                <li>How to filter data using JavaScript.</li>
-                <li>How to search student names.</li>
-                <li>How to sort data in ascending and descending order.</li>
-                <li>How to validate API input.</li>
-                <li>How to return proper 400 and 404 error responses.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>âœ… Conclusion</h2>
-            <p>
-                This lab improved the Student API by adding filtering, searching,
-                sorting and input validation. It provided practical understanding
-                of how query parameters and route parameters can be used to create
-                a more useful Node.js API.
-            </p>
-        </section>
-    `;
-
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 04 - Advanced Student API", content));
-    return;
-}
-
-
-if (pathname === "/lab/05") {
-    const content = `
-        <div class="hero">
-            <div class="badge">LAB 05</div>
-            <h1>Food Delivery Tracker</h1>
-            <p>Asynchronous Programming using Callbacks, Promises and Async/Await</p>
-        </div>
-
-        <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
-            <p>
-                The aim of this lab is to understand asynchronous programming in
-                Node.js by creating a simple Food Delivery Tracker. Different
-                asynchronous techniques are used to process food orders and
-                understand how Node.js handles tasks without blocking the program.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
-            <ul>
-                <li>Implemented asynchronous operations using callbacks.</li>
-                <li>Implemented asynchronous operations using Promises.</li>
-                <li>Implemented Promise chaining.</li>
-                <li>Used async/await for handling asynchronous operations.</li>
-                <li>Processed multiple food orders concurrently.</li>
-                <li>Observed the output of different asynchronous approaches.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
-
-            <h3>1. Callbacks</h3>
-            <p>
-                The callback version performs food delivery steps one after another
-                using callback functions. A callback is executed after an
-                asynchronous operation is completed.
-            </p>
-
-            <h3>2. Promises</h3>
-            <p>
-                Promises are used to represent the future result of an asynchronous
-                operation. They make asynchronous code easier to manage than
-                deeply nested callbacks.
-            </p>
-
-            <h3>3. Promise Chaining</h3>
-            <p>
-                Multiple asynchronous operations are connected using
-                <b>.then()</b>. The next operation starts after the previous
-                operation is completed.
-            </p>
-
-            <h3>4. Async/Await</h3>
-            <p>
-                Async/await provides a simpler way to write asynchronous code.
-                The <b>await</b> keyword waits for a Promise to complete before
-                continuing with the next step.
-            </p>
-
-            <h3>5. Concurrent Orders</h3>
-            <p>
-                Multiple food orders are processed at the same time using
-                asynchronous execution. This demonstrates how Node.js can handle
-                multiple operations efficiently.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
-            <ul>
-                <li><b>callback-version.js</b> â€“ Callback-based implementation</li>
-                <li><b>promise-version.js</b> â€“ Promise-based implementation</li>
-                <li><b>chaining-version.js</b> â€“ Promise chaining implementation</li>
-                <li><b>async-await-version.js</b> â€“ Async/Await implementation</li>
-                <li><b>concurrent-orders.js</b> â€“ Concurrent order processing</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
-                <li><b>reflection-notes.txt</b> â€“ Learning reflection</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ”„ Asynchronous Approaches</h2>
-
-            <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                    <th style="padding:12px; text-align:left;">Approach</th>
-                    <th style="padding:12px; text-align:left;">Purpose</th>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>Callback</b></td>
-                    <td style="padding:12px;">
-                        Executes a function after an asynchronous task completes.
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>Promise</b></td>
-                    <td style="padding:12px;">
-                        Represents the future result of an asynchronous operation.
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>Promise Chaining</b></td>
-                    <td style="padding:12px;">
-                        Connects multiple asynchronous operations in sequence.
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>Async/Await</b></td>
-                    <td style="padding:12px;">
-                        Provides a simpler and readable way to handle Promises.
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>Concurrent Orders</b></td>
-                    <td style="padding:12px;">
-                        Allows multiple orders to be processed at the same time.
-                    </td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
-
-                <div>
-                    <h3>Callback Output</h3>
-                    <img src="/screenshots/callback-output.png"
-                         alt="Callback Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Promise Output</h3>
-                    <img src="/screenshots/promise-output.png"
-                         alt="Promise Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Promise Chaining Output</h3>
-                    <img src="/screenshots/chaining-output.png"
-                         alt="Promise Chaining Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Async/Await Output</h3>
-                    <img src="/screenshots/async-await-output.png"
-                         alt="Async Await Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Concurrent Orders Output</h3>
-                    <img src="/screenshots/concurrent-orders-output.png"
-                         alt="Concurrent Orders Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
-            <ul>
-                <li>Difference between synchronous and asynchronous execution.</li>
-                <li>How callbacks are used in Node.js.</li>
-                <li>How Promises handle asynchronous operations.</li>
-                <li>How Promise chaining connects multiple tasks.</li>
-                <li>How async/await makes asynchronous code easier to read.</li>
-                <li>How multiple operations can run concurrently.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>âœ… Conclusion</h2>
-            <p>
-                This lab provided practical understanding of asynchronous
-                programming in Node.js. Callbacks, Promises, Promise chaining,
-                async/await and concurrent execution were implemented using a
-                Food Delivery Tracker example.
-            </p>
-        </section>
-    `;
-
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 05 - Food Delivery Tracker", content));
-    return;
-}
-
-
-if (pathname === "/lab/06") {
-    const content = `
-        <div class="hero">
-            <div class="badge">LAB 06</div>
-            <h1>File System Module</h1>
-            <p>Reading, Writing, Appending, Deleting Files and Working with Notes</p>
-        </div>
-
-        <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
-            <p>
-                The aim of this lab is to understand how Node.js works with files
-                using the built-in File System module. The lab covers reading,
-                writing, appending and deleting files along with asynchronous
-                file operations and a simple notes application.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
-            <ul>
-                <li>Read a file using asynchronous file handling.</li>
-                <li>Read a file using synchronous file handling.</li>
-                <li>Created and wrote data into a file.</li>
-                <li>Appended new content to an existing file.</li>
-                <li>Deleted a file using Node.js.</li>
-                <li>Used async/await with file operations.</li>
-                <li>Created a simple notes application.</li>
-                <li>Added notes with timestamps.</li>
-                <li>Read saved notes from the notes file.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
-
-            <h3>1. Reading Files</h3>
-            <p>
-                The <b>fs</b> module was used to read file contents. Both
-                asynchronous and synchronous approaches were implemented and
-                compared.
-            </p>
-
-            <h3>2. Writing Files</h3>
-            <p>
-                The write operation creates a file and stores the required
-                content in it.
-            </p>
-
-            <h3>3. Appending Files</h3>
-            <p>
-                New content can be added to an existing file without removing
-                the previous content.
-            </p>
-
-            <h3>4. Deleting Files</h3>
-            <p>
-                The delete operation removes a file using the File System module.
-            </p>
-
-            <h3>5. Async/Await</h3>
-            <p>
-                Async/await was used to make asynchronous file operations easier
-                to read and manage.
-            </p>
-
-            <h3>6. Notes Application</h3>
-            <p>
-                A simple notes system was created where users can add notes and
-                read the saved notes from <b>notes.txt</b>.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
-            <ul>
-                <li><b>sample.txt</b> â€“ Sample text file</li>
-                <li><b>read-async.js</b> â€“ Asynchronous file reading</li>
-                <li><b>read-sync.js</b> â€“ Synchronous file reading</li>
-                <li><b>write-file.js</b> â€“ File writing</li>
-                <li><b>append-file.js</b> â€“ Appending content</li>
-                <li><b>delete-file.js</b> â€“ File deletion</li>
-                <li><b>async-await-version.js</b> â€“ Async/Await file handling</li>
-                <li><b>add-note.js</b> â€“ Adds a note with timestamp</li>
-                <li><b>read-notes.js</b> â€“ Reads saved notes</li>
-                <li><b>notes.txt</b> â€“ Stores notes</li>
-                <li><b>reflection-notes.txt</b> â€“ Lab reflection</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ”„ File System Operations</h2>
-
-            <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                    <th style="padding:12px; text-align:left;">Operation</th>
-                    <th style="padding:12px; text-align:left;">File</th>
-                    <th style="padding:12px; text-align:left;">Purpose</th>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;">Read</td>
-                    <td style="padding:12px;">read-async.js / read-sync.js</td>
-                    <td style="padding:12px;">Reads file contents</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;">Write</td>
-                    <td style="padding:12px;">write-file.js</td>
-                    <td style="padding:12px;">Writes data to a file</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;">Append</td>
-                    <td style="padding:12px;">append-file.js</td>
-                    <td style="padding:12px;">Adds data to an existing file</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;">Delete</td>
-                    <td style="padding:12px;">delete-file.js</td>
-                    <td style="padding:12px;">Deletes a file</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;">Notes</td>
-                    <td style="padding:12px;">add-note.js / read-notes.js</td>
-                    <td style="padding:12px;">Adds and reads notes</td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ’» Example Output</h2>
-
-            <pre class="output">This line runs BEFORE the file content is printed.
-
-Node.js File System Module
-This is my Lab 06 assignment.
-I am learning file handling.
-
-Note added!</pre>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; margin-top:20px;">
-
-                <div>
-                    <h3>Read Comparison</h3>
-                    <img src="/screenshots/read-comparison.png"
-                         alt="Read Comparison Screenshot"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Notes Application</h3>
-                    <img src="/screenshots/notes-app-output.png"
-                         alt="Notes Application Output"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
-            <ul>
-                <li>How the Node.js File System module works.</li>
-                <li>Difference between synchronous and asynchronous file reading.</li>
-                <li>How to create and write files.</li>
-                <li>How to append and delete files.</li>
-                <li>How async/await can be used with file operations.</li>
-                <li>How to build a simple notes application.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>âœ… Conclusion</h2>
-            <p>
-                This lab provided practical understanding of file handling in
-                Node.js. Different File System operations were implemented and
-                a simple notes application was created using Node.js.
-            </p>
-        </section>
-    `;
-
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 06 - File System Module", content));
-    return;
-}
-
-
-if (pathname === "/lab/07") {
-    const content = `
-        <div class="hero">
-            <div class="badge">LAB 07</div>
-            <h1>EventEmitter and Event-Driven Programming</h1>
-            <p>Implementing EventEmitter, Listeners, Events and Error Handling</p>
-        </div>
-
-        <section class="card">
-            <h2>ðŸ“Œ Problem Statement</h2>
-            <p>
-                The aim of this lab is to understand event-driven programming in
-                Node.js using the built-in EventEmitter module. The lab demonstrates
-                how events are created, emitted and handled using listeners.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸŽ¯ Tasks Performed</h2>
-            <ul>
-                <li>Created basic events using EventEmitter.</li>
-                <li>Registered event listeners.</li>
-                <li>Compared <b>on()</b> and <b>once()</b> listeners.</li>
-                <li>Handled EventEmitter errors.</li>
-                <li>Added multiple listeners to the same event.</li>
-                <li>Created a notification center using events.</li>
-                <li>Created an order tracker using EventEmitter.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ’¡ Solution / Implementation</h2>
-
-            <h3>1. Basic EventEmitter</h3>
-            <p>
-                The EventEmitter class was used to create an event-based system.
-                An event is registered using a listener and triggered using
-                <b>emit()</b>.
-            </p>
-
-            <h3>2. once() Listener</h3>
-            <p>
-                The <b>once()</b> listener runs only one time, even if the same
-                event is emitted multiple times.
-            </p>
-
-            <h3>3. on() Listener</h3>
-            <p>
-                The <b>on()</b> listener continues to respond every time the
-                related event is emitted.
-            </p>
-
-            <h3>4. Error Handling</h3>
-            <p>
-                EventEmitter errors were handled using an error listener.
-                An example of an unhandled error was also tested to understand
-                why error handling is important.
-            </p>
-
-            <h3>5. Multiple Listeners</h3>
-            <p>
-                More than one listener can be attached to the same event.
-                When the event is emitted, all registered listeners respond.
-            </p>
-
-            <h3>6. Notification Center</h3>
-            <p>
-                A simple notification system was created where different
-                listeners respond to notification events.
-            </p>
-
-            <h3>7. Order Tracker</h3>
-            <p>
-                EventEmitter was used to track different stages of an order,
-                demonstrating how events can represent changes in a process.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“‚ Files Used</h2>
-            <ul>
-                <li><b>events-basic.js</b> â€“ Basic EventEmitter example</li>
-                <li><b>once-only-listener.js</b> â€“ once() and on() comparison</li>
-                <li><b>error-handling.js</b> â€“ Event error handling</li>
-                <li><b>multiple-listeners.js</b> â€“ Multiple event listeners</li>
-                <li><b>notify-student.js</b> â€“ Notification center</li>
-                <li><b>order-tracker.js</b> â€“ Order tracking using events</li>
-                <li><b>reflection-notes.txt</b> â€“ Lab reflection</li>
-                <li><b>README.md</b> â€“ Lab documentation</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ”„ Important EventEmitter Methods</h2>
-
-            <table style="width:100%; border-collapse:collapse;">
-                <tr>
-                    <th style="padding:12px; text-align:left;">Method</th>
-                    <th style="padding:12px; text-align:left;">Purpose</th>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>on()</b></td>
-                    <td style="padding:12px;">Registers a listener for an event.</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>once()</b></td>
-                    <td style="padding:12px;">Runs a listener only once.</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>emit()</b></td>
-                    <td style="padding:12px;">Triggers an event.</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>removeListener()</b></td>
-                    <td style="padding:12px;">Removes a registered listener.</td>
-                </tr>
-
-                <tr>
-                    <td style="padding:12px;"><b>listenerCount()</b></td>
-                    <td style="padding:12px;">Checks the number of listeners.</td>
-                </tr>
-            </table>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“¸ Lab Screenshots</h2>
-
-            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:20px;">
-
-                <div>
-                    <h3>EventEmitter Error</h3>
-                    <img src="/screenshots/error-handling-crash.png"
-                         alt="EventEmitter Error"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Fixed Error Handling</h3>
-                    <img src="/screenshots/error-handling-fixed-output.png"
-                         alt="Fixed Error Handling"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Multiple Listeners</h3>
-                    <img src="/screenshots/multiple-listeners-output.png"
-                         alt="Multiple Listeners"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Four Listeners</h3>
-                    <img src="/screenshots/multiple-listeners-four-output.png"
-                         alt="Four Listeners"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Notification Center</h3>
-                    <img src="/screenshots/notification-center-output.png"
-                         alt="Notification Center"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>once() vs on()</h3>
-                    <img src="/screenshots/once-vs-on-output.png"
-                         alt="once versus on"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-                <div>
-                    <h3>Order Tracker</h3>
-                    <img src="/screenshots/order-tracker-output.png"
-                         alt="Order Tracker"
-                         style="width:100%; border-radius:12px;">
-                </div>
-
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>ðŸ“š What I Learned</h2>
-            <ul>
-                <li>How event-driven programming works in Node.js.</li>
-                <li>How EventEmitter creates and manages events.</li>
-                <li>Difference between on() and once().</li>
-                <li>How multiple listeners respond to the same event.</li>
-                <li>Why EventEmitter errors should be handled properly.</li>
-                <li>How events can be used in practical applications.</li>
-            </ul>
-        </section>
-
-        <section class="card">
-            <h2>âœ… Conclusion</h2>
-            <p>
-                This lab provided practical understanding of EventEmitter and
-                event-driven programming in Node.js. Different event listeners,
-                error handling, notifications and order tracking were implemented
-                successfully.
-            </p>
-        </section>
-    `;
-
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 07 - EventEmitter", content));
-    return;
-}
 
     // ==================================================
     // ABOUT
@@ -2417,7 +1754,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“Œ Problem Statement</h2>
+                    <h2>Problem Statement</h2>
 
                     <p>
                         Create a basic HTTP server using Node.js and handle
@@ -2431,7 +1768,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ› ï¸ Solution / Work Done</h2>
+                    <h2>Solution / Work Done</h2>
 
                     <p>
                         A basic HTTP server was created using Node.js.
@@ -2468,7 +1805,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“š Main Concepts</h2>
+                    <h2>Main Concepts</h2>
 
                     <ul>
 
@@ -2486,7 +1823,7 @@ marks : object
 
                 <section class="card">
 
-                    <h2>ðŸ“– What I Learned</h2>
+                    <h2>What I Learned</h2>
 
                     <ul>
 
@@ -3043,7 +2380,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                     <div class="info-card">
 
-                        <h3>ðŸ“Œ Problem Statement</h3>
+                        <h3>Problem Statement</h3>
 
                         <p>
                             The previous labs were developed separately,
@@ -3063,7 +2400,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                     <div class="info-card">
 
-                        <h3>ðŸŽ¯ Objective</h3>
+                        <h3>Objective</h3>
 
                         <ul>
 
@@ -3096,7 +2433,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ’¡ Proposed Solution</h3>
+                    <h3>Proposed Solution</h3>
 
                     <p>
                         Lab 08 uses the Node.js HTTP Server,
@@ -3116,7 +2453,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ›  Technologies Used</h3>
+                    <h3>Technologies Used</h3>
 
                     <div class="tech-grid">
 
@@ -3141,7 +2478,7 @@ Delivery Log: Order ORD101 delivery completed.
                     <div class="feature-grid">
 
                         <div class="feature-item">
-                            <strong>ðŸ”— Lab Integration</strong>
+                            <strong>Lab Integration</strong>
 
                             <p>
                                 Provides one portal for Lab 01 to Lab 07.
@@ -3159,7 +2496,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ“Š Dashboard API</strong>
+                            <strong>Dashboard API</strong>
 
                             <p>
                                 Provides server and laboratory statistics.
@@ -3168,7 +2505,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ“ Request Logging</strong>
+                            <strong>Request Logging</strong>
 
                             <p>
                                 Records server requests using EventEmitter.
@@ -3177,7 +2514,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ–¼ Screenshot Viewer</strong>
+                            <strong>Screenshot Viewer</strong>
 
                             <p>
                                 Provides access to laboratory screenshots.
@@ -3186,7 +2523,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>ðŸ”’ Security</strong>
+                            <strong>Security</strong>
 
                             <p>
                                 Only approved scripts can be executed.
@@ -3200,7 +2537,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ”— Important Routes & APIs</h3>
+                    <h3>Important Routes & APIs</h3>
 
                     <div class="route-table">
 
@@ -3264,7 +2601,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ“ˆ Project Statistics</h3>
+                    <h3>Project Statistics</h3>
 
                     <div class="stats-grid">
 
@@ -3298,7 +2635,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>ðŸ“š What I Learned</h3>
+                    <h3>What I Learned</h3>
 
                     <ul>
 
@@ -4188,3 +3525,4 @@ server.listen(4000, () => {
     );
 
 });
+
