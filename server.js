@@ -1,4 +1,5 @@
-﻿const http = require("http");
+﻿const { runLabProgram, liveRunHTML } = require("./live-run");
+const http = require("http");
 const url = require("url");
 
 const EventEmitter = require("events");
@@ -176,6 +177,8 @@ const labs = [
 // HTML PAGE TEMPLATE
 // ======================================================
 
+function liveRunButton(lab, file) { return '<div class="live-run"><button class="button" onclick="runLab(\''+lab+'\', \''+file+'\')">Ã¢â€“Â¶ Run Program</button><pre id="output-'+lab+'-'+file.replace(/[a-zA-Z0-9]/g,'')+'" class="live-output">Click Run Program to see live output...</pre></div>'; }
+
 function pageTemplate(title, content) {
 
     return `
@@ -270,11 +273,11 @@ nav a:hover {
 
 .card {
     background: #ffffff;
-    padding: 25px;
-    border-radius: 15px;
-    border-top: 4px solid #68a063;
-    box-shadow: 0 7px 22px rgba(0, 0, 0, 0.08);
-    transition: 0.2s;
+    margin-top: 25px;
+    padding: 28px;
+    border-radius: 14px;
+    border: 1px solid #e1e6e2;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
 }
 
 .card:hover {
@@ -369,7 +372,7 @@ button:hover {
     color: #3f7041;
 }
 
-.box h3 {
+.box .card, .box .section-card, .box .info-card { background: transparent; margin-top: 25px; padding: 0; border: none; border-radius: 0; box-shadow: none; } .box .card:hover { transform: none; box-shadow: none; } .box h3 {
     color: #3f7041;
     margin-top: 25px;
     margin-bottom: 10px;
@@ -750,6 +753,8 @@ footer {
 
 }
 
+.lab-screenshot { width:100%; height:260px; object-fit:contain; display:block; background:#ffffff; border-radius:10px; border:1px solid #e1e6e2; }
+.university-header{text-align:center;margin-bottom:18px}.university-name{font-size:28px;font-weight:700;letter-spacing:.3px}.department-name{font-size:17px;margin-top:5px;opacity:.85}.portfolio-title{text-align:center;font-size:24px;font-weight:600;margin-top:10px}
 </style>
 
 </head>
@@ -774,11 +779,12 @@ footer {
 
 
 ${content}
+${liveRunHTML()}
 
 
 <footer>
 
-    BCA Semester VII â€¢ Node.js Laboratory â€¢ Kanak
+    BCA Semester VII &bull; Node.js Laboratory &bull; Kanak
 
 </footer>
 
@@ -870,7 +876,7 @@ const server = http.createServer((req, res) => {
             <section class="hero">
 
                 <h1>
-                    Node.js Lab Portfolio
+                    <div class="university-header"><div class="university-name">Dev Sanskriti Vishwavidyalaya</div><div class="department-name">Computer Science Department</div></div><div class="portfolio-title">Node.js Lab Portfolio</div>
                 </h1>
 
                 <p>
@@ -961,10 +967,10 @@ if (pathname === "/lab/01") {
         <section class="card">
             <h2>Files Used</h2>
             <ul>
-                <li><b>app.js</b> â€“ Main Node.js program</li>
-                <li><b>package.json</b> â€“ Project configuration</li>
-                <li><b>difference.txt</b> â€“ Difference/reference notes</li>
-                <li><b>node-version.png</b> â€“ Node.js version screenshot</li>
+                <li><b>app.js</b> - Main Node.js program</li>
+                <li><b>package.json</b> - Project configuration</li>
+                <li><b>difference.txt</b> - Difference/reference notes</li>
+                <li><b>node-version.png</b> - Node.js version screenshot</li>
             </ul>
         </section>
 
@@ -1031,7 +1037,8 @@ marks : object</pre>
                 The program was successfully executed and different variables and
                 data types were tested through console output.
             </p>
-        </section>
+        <a class="button" href="/">Back to Dashboard</a>
+</section>
     `;
 
    res.writeHead(200, {
@@ -1049,13 +1056,14 @@ return;
 
 if (pathname === "/lab/03") {
     const content = `
-        <div class="hero">
-            <div class="badge">LAB 03</div>
-            <h1>Student Directory API</h1>
-            <p>Building a Node.js API using HTTP routes and JSON data</p>
-        </div>
+        <main class="container">
 
-        <section class="card">
+        <div class="box">
+            <div class="lab-number">LAB 03</div>
+            <h1>Student Directory API</h1>
+            <p><strong>Task:</strong> Building a Node.js API using HTTP routes and JSON data</p>
+
+            <section class="card">
             <h2>Problem Statement</h2>
             <p>
                 The aim of this lab is to create a simple Student Directory API
@@ -1177,42 +1185,42 @@ if (pathname === "/lab/03") {
                     <h3>Screenshot 1</h3>
                     <img src="/screenshots/lab3-1.png"
                          alt="Lab 03 Screenshot 1"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 2</h3>
                     <img src="/screenshots/lab3-2.png"
                          alt="Lab 03 Screenshot 2"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 3</h3>
                     <img src="/screenshots/lab3-3.png"
                          alt="Lab 03 Screenshot 3"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 4</h3>
                     <img src="/screenshots/lab3-4.png"
                          alt="Lab 03 Screenshot 4"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 5</h3>
                     <img src="/screenshots/lab3-5.png"
                          alt="Lab 03 Screenshot 5"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 6</h3>
                     <img src="/screenshots/lab3-6.png"
                          alt="Lab 03 Screenshot 6"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
             </div>
@@ -1237,10 +1245,11 @@ if (pathname === "/lab/03") {
                 to retrieve, filter and search student and item data, along with
                 proper error handling.
             </p>
-        </section>
-    `;
-
-   res.writeHead(200, { "Content-Type": "text/html" });
+        <a class="button" href="/">Back to Dashboard</a>
+</section>
+        </div>
+        </main>
+    `;res.writeHead(200, { "Content-Type": "text/html" });
 res.end(pageTemplate("Lab 03 - Student Directory API", content));
 return;
 }
@@ -1383,35 +1392,35 @@ Combined:
                     <h3>Screenshot 1</h3>
                     <img src="/screenshots/lab4-1.png"
                          alt="Lab 04 Screenshot 1"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 2</h3>
                     <img src="/screenshots/lab4-2.png"
                          alt="Lab 04 Screenshot 2"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 3</h3>
                     <img src="/screenshots/lab4-3.png"
                          alt="Lab 04 Screenshot 3"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 4</h3>
                     <img src="/screenshots/lab4-4.png"
                          alt="Lab 04 Screenshot 4"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
                 <div>
                     <h3>Screenshot 5</h3>
                     <img src="/screenshots/lab4-5.png"
                          alt="Lab 04 Screenshot 5"
-                         style="width:100%; border-radius:12px;">
+                         class="lab-screenshot">
                 </div>
 
             </div>
@@ -1437,7 +1446,8 @@ Combined:
                 of how query parameters and route parameters can be used to create
                 a more useful Node.js API.
             </p>
-        </section>
+        <a class="button" href="/">Back to Dashboard</a>
+</section>
     `;
 
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -1779,23 +1789,23 @@ marks : object
                     <ul>
 
                         <li>
-                            <b>/</b> â€“ Welcome message with student details
+                            <b>/</b> - Welcome message with student details
                         </li>
 
                         <li>
-                            <b>/about</b> â€“ Short introduction
+                            <b>/about</b> - Short introduction
                         </li>
 
                         <li>
-                            <b>/college</b> â€“ College name and semester
+                            <b>/college</b> - College name and semester
                         </li>
 
                         <li>
-                            <b>/profile</b> â€“ Student details in JSON format
+                            <b>/profile</b> - Student details in JSON format
                         </li>
 
                         <li>
-                            <b>Other routes</b> â€“ 404 Page Not Found
+                            <b>Other routes</b> - 404 Page Not Found
                         </li>
 
                     </ul>
@@ -2057,13 +2067,13 @@ marks : object
 
                 <pre>
 Order Placed
-      â†“
+      ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 Restaurant Processing
-      â†“
+      ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 Food Preparation
-      â†“
+      ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 Delivery Partner
-      â†“
+      ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬Å“
 Order Delivered
                 </pre>
 
@@ -2473,7 +2483,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card">
 
-                    <h3>â­ Key Features</h3>
+                    <h3>ÃƒÂ¢Ã‚Â­Ã‚Â Key Features</h3>
 
                     <div class="feature-grid">
 
@@ -2487,7 +2497,7 @@ Delivery Log: Order ORD101 delivery completed.
 
 
                         <div class="feature-item">
-                            <strong>âš¡ Script Execution</strong>
+                            <strong>ÃƒÂ¢Ã…Â¡Ã‚Â¡ Script Execution</strong>
 
                             <p>
                                 Runs selected Node.js scripts through routes.
@@ -2670,7 +2680,7 @@ Delivery Log: Order ORD101 delivery completed.
 
                 <div class="section-card conclusion">
 
-                    <h3>âœ… Conclusion</h3>
+                    <h3>Conclusion</h3>
 
                     <p>
                         Lab 08 combines the major concepts learned
@@ -2811,24 +2821,13 @@ if (pathname.startsWith("/labs/") && pathname.endsWith("/run")) {
     }
 
     const allowedFiles = {
-        "05": [
-            "callbacks.js",
-            "promises.js",
-            "async-await.js"
-        ],
-        "06": [
-            "read-async.js",
-            "read-sync.js",
-            "write-file.js",
-            "append-file.js",
-            "delete-file.js"
-        ],
-        "07": [
-            "events-basic.js",
-            "once-only-listener.js",
-            "error-handling.js",
-            "multiple-listeners.js"
-        ]
+        "01": ["app.js", "server.js"],
+        "02": ["server.js"],
+        "03": ["students-server.js"],
+        "04": ["advanced-server.js"],
+        "05": ["async-await-version.js", "callback-version.js", "chaining-version.js", "concurrent-orders.js", "promise-version.js"],
+        "06": ["add-note.js", "append-file.js", "async-await-version.js", "delete-file.js", "read-async.js", "read-notes.js", "read-sync.js", "write-file.js"],
+        "07": ["error-handling-fixed.js", "error-handling.js", "events-basic.js", "multiple-listeners.js", "notify-student.js", "once-only-listener.js", "order-tracker.js"]
     };
 
     if (
@@ -3525,4 +3524,7 @@ server.listen(4000, () => {
     );
 
 });
+
+
+
 
