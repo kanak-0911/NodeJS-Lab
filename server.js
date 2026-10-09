@@ -789,7 +789,7 @@ footer {
 
 
 ${content}
-${liveRunHTML()}
+
 
 
 <footer>
@@ -1044,7 +1044,7 @@ marks : object</pre>
 });
 
 res.end(
-    pageTemplate("Lab 01 - Node.js Basics", content)
+    pageTemplate("Lab 01 - Node.js Basics", content + liveRunHTML("01"))
 );
 
 return;
@@ -1248,7 +1248,7 @@ if (pathname === "/lab/03") {
         </div>
         </main>
     `;res.writeHead(200, { "Content-Type": "text/html" });
-res.end(pageTemplate("Lab 03 - Student Directory API", content));
+res.end(pageTemplate("Lab 03 - Student Directory API", content + liveRunHTML("03")));
 return;
 }
 
@@ -1445,7 +1445,7 @@ Combined:
     `;
 
     res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 04 - Advanced Student API", content));
+    res.end(pageTemplate("Lab 04 - Advanced Student API", content + liveRunHTML("04")));
     return;
 }
 
@@ -2729,6 +2729,8 @@ Delivery Log: Order ORD101 delivery completed.
                         <br>
 
                         ${extra}
+
+                        ${liveRunHTML(number)}
 
                         <br>
 
