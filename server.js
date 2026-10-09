@@ -4,7 +4,7 @@ const url = require("url");
 
 const EventEmitter = require("events");
 const fs = require("fs");
-const { execFile } = require("child_process");
+const { execFile, spawn } = require("child_process");
 
 const students = [
     { id: 1, name: "Gauri", course: "BCA", marks: 72 },
@@ -755,6 +755,16 @@ footer {
 
 .lab-screenshot { width:100%; height:260px; object-fit:contain; display:block; background:#ffffff; border-radius:10px; border:1px solid #e1e6e2; }
 .university-header{text-align:center;margin-bottom:18px}.university-name{font-size:28px;font-weight:700;letter-spacing:.3px}.department-name{font-size:17px;margin-top:5px;opacity:.85}.portfolio-title{text-align:center;font-size:24px;font-weight:600;margin-top:10px}
+
+/* LAB 01-07 CONSISTENT LAYOUT */
+.container > .box:has(.lab-number):not(:has(.project-header)) > h1{line-height:1.25;margin-bottom:16px;overflow-wrap:anywhere}
+.container > .box:has(.lab-number):not(:has(.project-header)) > p{line-height:1.7;margin:12px 0}
+.container > .box:has(.lab-number):not(:has(.project-header)) h2{line-height:1.3;margin:24px 0 12px}
+.container > .box:has(.lab-number):not(:has(.project-header)) h3{line-height:1.35;margin:20px 0 10px}
+.container > .box:has(.lab-number):not(:has(.project-header)) section.card{background:#fff;margin:24px 0 0;padding:22px;border:1px solid #e1e6e2;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.05)}
+.container > .box:has(.lab-number):not(:has(.project-header)) section.card:hover{transform:none}
+.container > .box:has(.lab-number):not(:has(.project-header)) img{max-width:100%}
+.container > .box:has(.lab-number):not(:has(.project-header)) img.lab-screenshot{width:100%;height:240px;object-fit:contain;display:block;background:#fff;border-radius:10px;border:1px solid #e1e6e2}
 </style>
 
 </head>
@@ -800,6 +810,8 @@ ${liveRunHTML()}
 // ======================================================
 // CREATE SERVER
 // ======================================================
+
+const activeLabServers = new Map();
 
 const server = http.createServer((req, res) => {
     logger.emit("request", req.method, req.url);
@@ -910,11 +922,7 @@ const server = http.createServer((req, res) => {
 
 if (pathname === "/lab/01") {
     const content = `
-        <div class="hero">
-            <div class="badge">LAB 01</div>
-            <h1>Node.js Basics</h1>
-            <p>First Node.js Program, Console Output, Variables and Data Types</p>
-        </div>
+        <main class='container'><div class='box'><div class='lab-number'>LAB 01</div><h1>Node.js Basics</h1><p><strong>Task:</strong> First Node.js Program, Console Output, Variables and Data Types</p><p>Introduction to Node.js, console output, variables and basic data types.</p>
 
         <section class="card">
             <h2>Problem Statement</h2>
@@ -1007,17 +1015,7 @@ marks : object</pre>
     <h2>Screenshot</h2>
     <p>Node.js version used during the lab:</p>
 
-    <a href="/screenshots/lab01-node-version.png"
-       target="_blank"
-       style="display:inline-block;
-              margin-top:15px;
-              padding:12px 20px;
-              background:#4f46e5;
-              color:white;
-              text-decoration:none;
-              border-radius:8px;">
-        View Lab 01 Screenshot
-    </a>
+    <img src='/screenshots/lab01-node-version.png' alt='Node.js version screenshot' class='lab-screenshot'>
 </section>
 
         <section class="card">
@@ -1038,7 +1036,7 @@ marks : object</pre>
                 data types were tested through console output.
             </p>
         <a class="button" href="/">Back to Dashboard</a>
-</section>
+</section></div></main>
     `;
 
    res.writeHead(200, {
@@ -1257,11 +1255,7 @@ return;
 
 if (pathname === "/lab/04") {
     const content = `
-        <div class="hero">
-            <div class="badge">LAB 04</div>
-            <h1>Advanced Student API</h1>
-            <p>Filtering, Searching, Sorting and Query Parameters in Node.js</p>
-        </div>
+        <main class='container'><div class='box'><div class='lab-number'>LAB 04</div><h1>Advanced Student API</h1><p><strong>Task:</strong> Filtering, Searching, Sorting and Query Parameters in Node.js</p><p>Building an advanced Student API with filtering, searching, sorting and input validation.</p>
 
         <section class="card">
             <h2>Problem Statement</h2>
@@ -1447,7 +1441,7 @@ Combined:
                 a more useful Node.js API.
             </p>
         <a class="button" href="/">Back to Dashboard</a>
-</section>
+</section></div></main>
     `;
 
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -2846,6 +2840,27 @@ if (pathname.startsWith("/labs/") && pathname.endsWith("/run")) {
         return;
     }
 
+    // Keep Lab 02-04 servers running
+    if (['02', '03', '04'].includes(labNumber)) {
+        const port = 3000 + Number(labNumber);
+        let child = activeLabServers.get(labNumber);
+        if (!child || child.exitCode !== null) {
+            child = spawn(process.execPath, [fileName], {
+                cwd: 'Lab-' + labNumber,
+                env: { ...process.env, PORT: String(port) },
+                stdio: 'ignore',
+                windowsHide: true
+            });
+            activeLabServers.set(labNumber, child);
+            child.on('exit', () => {
+                if (activeLabServers.get(labNumber) === child) activeLabServers.delete(labNumber);
+            });
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ file: fileName, output: 'Lab ' + labNumber + ' server started.', url: 'http://localhost:' + port + '/students' }));
+        return;
+    }
+
     const filePath = `Lab-${labNumber}/${fileName}`;
 
     execFile(
@@ -3524,6 +3539,12 @@ server.listen(4000, () => {
     );
 
 });
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 const url = require('url');
 
 const students = [
@@ -120,7 +120,7 @@ function handler(req, res) {
 module.exports = handler;
 
 if (require.main === module) {
-    http.createServer(handler).listen(3000, () => {
+    http.createServer(handler).listen(Number(process.env.PORT) || 3000, () => {
         console.log("Server running on port 3000");
     });
 }

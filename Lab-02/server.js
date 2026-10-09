@@ -1,4 +1,4 @@
-const http = require("http");
+﻿const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
@@ -274,7 +274,7 @@ function handler(req, res) {
 module.exports = handler;
 
 if (require.main === module) {
-    http.createServer(handler).listen(3000, () => {
+    http.createServer(handler).listen(Number(process.env.PORT) || 3000, () => {
         console.log("Server running at http://localhost:3000");
     });
 }

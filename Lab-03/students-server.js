@@ -1,4 +1,4 @@
-const http = require('http');
+﻿const http = require('http');
 
 const students = [
     { id: 1, name: "Gauri", course: "BCA" },
@@ -95,7 +95,7 @@ function handler(req, res) {
 module.exports = handler;
 
 if (require.main === module) {
-    http.createServer(handler).listen(3000, () => {
+    http.createServer(handler).listen(Number(process.env.PORT) || 3000, () => {
         console.log("Server running on port 3000");
     });
 }
