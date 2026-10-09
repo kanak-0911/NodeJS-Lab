@@ -765,6 +765,45 @@ footer {
 .container > .box:has(.lab-number):not(:has(.project-header)) section.card:hover{transform:none}
 .container > .box:has(.lab-number):not(:has(.project-header)) img{max-width:100%}
 .container > .box:has(.lab-number):not(:has(.project-header)) img.lab-screenshot{width:100%;height:240px;object-fit:contain;display:block;background:#fff;border-radius:10px;border:1px solid #e1e6e2}
+
+/* CENTER LIVE PROGRAM OUTPUT CONSISTENTLY */
+.live-run-box {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto !important;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.live-run-box h2 {
+    text-align: center;
+}
+
+.live-run-box #liveFiles-01,
+.live-run-box #liveFiles-02,
+.live-run-box #liveFiles-03,
+.live-run-box #liveFiles-04,
+.live-run-box #liveFiles-05,
+.live-run-box #liveFiles-06,
+.live-run-box #liveFiles-07 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.live-run-box button {
+    margin: 8px auto;
+}
+
+.live-run-box pre {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
 </style>
 
 </head>
@@ -1035,8 +1074,7 @@ marks : object</pre>
                 The program was successfully executed and different variables and
                 data types were tested through console output.
             </p>
-        <a class="button" href="/">Back to Dashboard</a>
-</section></div></main>
+        </section></div></main>
     `;
 
    res.writeHead(200, {
@@ -1044,7 +1082,7 @@ marks : object</pre>
 });
 
 res.end(
-    pageTemplate("Lab 01 - Node.js Basics", content + liveRunHTML("01"))
+    pageTemplate("Lab 01 - Node.js Basics", content + liveRunHTML("01") + '<div style="text-align:center;margin:20px auto;"><a class="button" href="/">Back to Dashboard</a></div>')
 );
 
 return;
@@ -1243,12 +1281,12 @@ if (pathname === "/lab/03") {
                 to retrieve, filter and search student and item data, along with
                 proper error handling.
             </p>
-        <a class="button" href="/">Back to Dashboard</a>
+
 </section>
         </div>
         </main>
     `;res.writeHead(200, { "Content-Type": "text/html" });
-res.end(pageTemplate("Lab 03 - Student Directory API", content + liveRunHTML("03")));
+res.end(pageTemplate("Lab 03 - Student Directory API", content + liveRunHTML("03") + '<div style="text-align:center;margin:20px auto;"><a class="button" href="/">Back to Dashboard</a></div>'));
 return;
 }
 
@@ -1440,12 +1478,11 @@ Combined:
                 of how query parameters and route parameters can be used to create
                 a more useful Node.js API.
             </p>
-        <a class="button" href="/">Back to Dashboard</a>
-</section></div></main>
+        </section></div></main>
     `;
 
     res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(pageTemplate("Lab 04 - Advanced Student API", content + liveRunHTML("04")));
+    res.end(pageTemplate("Lab 04 - Advanced Student API", content + liveRunHTML("04") + '<div style="text-align:center;margin:20px auto;"><a class="button" href="/">Back to Dashboard</a></div>'));
     return;
 }
 
@@ -2730,17 +2767,12 @@ Delivery Log: Order ORD101 delivery completed.
 
                         ${extra}
 
-                        ${liveRunHTML(number)}
+                    </div>
 
-                        <br>
+                    ${liveRunHTML(number)}
 
-                        <a
-                            class="button"
-                            href="/"
-                        >
-                            Back to Dashboard
-                        </a>
-
+                    <div style="text-align:center;margin:20px auto;">
+                        <a class="button" href="/">Back to Dashboard</a>
                     </div>
 
                 </main>
@@ -3541,6 +3573,9 @@ server.listen(4000, () => {
     );
 
 });
+
+
+
 
 
 
